@@ -1,11 +1,11 @@
 import React from "react";
 
-function Login() {
+function PageNotFound() {
   return (
     <header className="header">
-      <h1>Login</h1>
+      <h1>Page Not Found</h1>
     </header>
   );
 }
 
-export default Login;
+export default PageNotFound;
