@@ -18,24 +18,24 @@ function App() {
 
   return (
     <UserContext.Provider value={currentUser}>
-      <div className="page">
+      <div className="App__page">
         <Header />
         <Routes>
           <Route
             path="/"
-            element={<Main />}
+            element={<> <Main /> <Footer /> </>}
           />
           <Route
             path="/movies"
-            element={<Movies />}
+            element={<> <Movies /> <Footer /> </>}
           />
           <Route
             path="/saved-movies"
-            element={<MoviesCardList />}
+            element={<> <MoviesCardList /> <Footer /> </>}
           />
           <Route
             path="/profile"
-            element={<Profile />}
+            element={<> <Profile /> </>}
           />
           <Route
             path="/signup"
@@ -47,7 +47,6 @@ function App() {
           />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-        <Footer />
       </div>
     </UserContext.Provider>
   );
