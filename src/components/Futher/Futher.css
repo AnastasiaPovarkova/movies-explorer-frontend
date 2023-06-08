@@ -1,0 +1,25 @@
+.futher {
+  margin: 50px 0 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.futher__button {
+  padding: 0;
+  width: 320px;
+  height: 36px;
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid #E8E8E8;
+  border-radius: 6px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #000000;
+}

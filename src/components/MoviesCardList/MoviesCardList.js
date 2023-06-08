@@ -1,10 +1,17 @@
 import React from "react";
+import './MoviesCardList.css';
+import MoviesCard from '../MoviesCard/MoviesCard'
 
 function MoviesCardList() {
   return (
-    <header className="header">
-      <h1>MoviesCardList</h1>
-    </header>
+    <div className="movies"> 
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+    </div>
   );
 }
 
