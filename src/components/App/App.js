@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import Login from "../Login/Login";
@@ -31,7 +31,7 @@ function App() {
           />
           <Route
             path="/saved-movies"
-            element={<> <MoviesCardList /> <Footer /> </>}
+            element={<> <SavedMovies /> <Footer /> </>}
           />
           <Route
             path="/profile"
