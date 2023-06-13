@@ -26,10 +26,14 @@
 
 .search__input {
   all: unset;
-  width: 100%;
-  align-items: stretch;
-  font-family: 'Inter';
-  font-style: normal;
+  flex: 1;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #000;
+}
+
+.search__input::placeholder {
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
@@ -63,8 +67,6 @@
 
 .search__text {
   margin: 0;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 18px;

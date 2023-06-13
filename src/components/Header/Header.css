@@ -34,8 +34,6 @@
 .header__link {
   text-decoration: none;
   margin: 0;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
@@ -45,8 +43,6 @@
 .header__navlink {
   text-decoration: none;
   margin: 0;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 18px;
@@ -76,4 +72,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (max-width: 880px) {
+  .header {
+    margin: 0 30px 0;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .header {
+    margin: 0 14px 0;
+  }
+  .header__right {
+    column-gap: 14px;
+  }
+  .header__link {
+    font-size: 10px;
+    line-height: 16px;
+  }
+  .header__link-entry {
+    width: 54px;
+    height: 26px;
+  }
 }

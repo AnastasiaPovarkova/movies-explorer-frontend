@@ -22,3 +22,25 @@
   letter-spacing: -0.04em;
   color: #000000;
 }
+
+@media screen and (max-width: 880px) {
+  .promo {
+    margin: 20px 20px 0;
+  }
+  .promo__title {
+    margin: 350px 24px 380px;
+    font-size: 40px;
+    line-height: 52px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .promo {
+    margin: 14px 14px 0;
+  }
+  .promo__title {
+    margin: 220px 14px 255px;
+    font-size: 29px;
+    line-height: 37px;
+  }
+}

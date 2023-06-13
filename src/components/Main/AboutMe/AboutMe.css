@@ -8,12 +8,10 @@
   box-sizing: border-box;
 }
 
-.about__name {
+.about__title {
   margin: 0;
   padding-bottom: 23px;
   width: 100%;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 22px;
   line-height: 27px;
@@ -21,4 +19,128 @@
   color: #000000;
   border-bottom: 1px solid #000000;
   text-align: left;
+}
+
+.about__main {
+  margin-top: 66px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.about__info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.about__name {
+  margin: 0;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  color: #000000;
+}
+
+.about__profession {
+  margin: 0;
+  margin: 18px 0 26px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #000000;
+  mix-blend-mode: normal;
+}
+
+.about__text {
+  margin: 0;
+  max-width: 600px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #000000;
+  mix-blend-mode: normal;
+}
+
+.about__link {
+  margin: 0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  margin-top: auto;
+  text-decoration: none;
+}
+
+.about__img {
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 880px) {
+  .about {
+    margin: 90px 50px 90px;
+  }
+  .about__name {
+    font-size: 40px;
+    line-height: 40px;
+  }
+  .about__profession {
+    margin: 16px 0 20px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .about__text {
+    max-width: 364px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .about__img {
+    width: 255px;
+    height: 307px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .about {
+    margin: 70px 14px 70px;
+  }
+  .about__title {
+    padding-bottom: 28px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .about__main {
+    margin-top: 60px;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+  .about__name {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .about__profession {
+    margin: 20px 0 20px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .about__text {
+    width: 100%;
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .about__link {
+    margin-top: 40px;
+  }
+  .about__img {
+    width: 292px;
+    height: 352px;
+  }
 }

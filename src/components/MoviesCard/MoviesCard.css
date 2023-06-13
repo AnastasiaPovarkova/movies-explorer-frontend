@@ -30,8 +30,6 @@
 
 .movie__name {
   margin: 0;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
@@ -40,8 +38,6 @@
 
 .movie__duration {
   margin: 0;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 11px;
   line-height: 13px;

@@ -28,8 +28,6 @@
 
 .login__title {
   margin: 40px 0 40px;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
@@ -37,8 +35,6 @@
 }
 
 .login__lable {
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
@@ -50,8 +46,6 @@
   height: 27px;
   border: none;
   border-bottom: 1px solid #E8E8E8;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -61,8 +55,6 @@
 .login__span {
   margin: 8px 0 8px;
   height: 12px;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
@@ -77,8 +69,6 @@
   background-color: #3456F3;
   border: none;
   border-radius: 3px;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -98,8 +88,6 @@
 .login__text {
   margin: 0;
   margin-right: 6px;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
