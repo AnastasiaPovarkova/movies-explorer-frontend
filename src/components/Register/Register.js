@@ -5,8 +5,8 @@ import './Register.css';
 
 function Register() {
   return (
-    <div className="register">
-      <form name="register__form" className="register__form" noValidate>
+    <section className="register">
+      <form name="register__form" className="register__form">
         <div className="register__inputs">
           <img className="register__logo" src={logo} alt="Movies Explorer" />
           <h2 className="register__title">Добро пожаловать!</h2>
@@ -43,13 +43,13 @@ function Register() {
           />
           <span className="profession-field-error register__span"></span>
         </div>
-        <button type="submit" className="register__submit" name="submit" defaultValue="Войти">Зарегистрироваться</button>
+        <button type="submit" className="register__submit" name="submit" defaultValue="Зарегистрироваться">Зарегистрироваться</button>
       </form>
       <div className="register__bottom">
         <h2 className="register__text">Уже зарегистрированы?</h2>
         <Link to="/signin" className="register__text register__link">Войти</Link>
       </div>
-    </div>
+    </section>
   );
 }
 

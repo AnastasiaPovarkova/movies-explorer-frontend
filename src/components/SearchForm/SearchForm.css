@@ -79,3 +79,12 @@
   margin: 0 70px 10px;
   border-bottom: 1px solid #E8E8E8;
 }
+
+@media screen and (max-width: 580px) {
+  .search__loupe {
+    display: none;
+  }
+  .search {
+    flex-direction: column;
+  }
+}

@@ -1,15 +1,17 @@
 import React from "react";
 import logo from "../../images/logo.svg";
+
 import { Link, Routes, Route } from 'react-router-dom';
 import './Header.css';
 
-function Header() {
+function Header({handleBurgerClick, isBurgerOpen}) {
+
   return (
     <header className="header">
       <div className="header__left">
       <Routes>
         {["/", "/movies", "/saved-movies", "/profile"].map((path) => (
-          <Route path={path} element={<img className="header__logo" src={logo} alt="Movies Explorer" />} />
+          <Route path={path} element={<Link to="/"><img className="header__logo" src={logo} alt="Movies Explorer" /></Link>} />
         ))}
       </Routes>
         <div className="header__nav">
@@ -30,9 +32,23 @@ function Header() {
             <Link to="/signin" className="header__link header__link-entry">Войти</Link>
           </>} />
           {["/movies", "/saved-movies", "/profile"].map((path) => (
-            <Route path={path} element={<Link to="/profile" className="header__link header__link-account">Аккаунт</Link>} />
+              <Route path={path} element={<>
+                <Link to="/profile" className="header__link header__link-account">Аккаунт</Link>
+                <button
+                  type="button"
+                  aria-label="Нравится"
+                  className={`header__burger ${isBurgerOpen ? "header__burger-close" : ""}`}
+                  onClick={handleBurgerClick}
+            ></button>
+            </>} />
           ))}
         </Routes>
+        <div className={`header__container ${isBurgerOpen ? "header__burger-opened" : ""}`}>
+          <Link to="/" className="header__burgerlink">Главная</Link>
+          <Link to="/movies" className="header__burgerlink header__burgerlink-here">Фильмы</Link>
+          <Link to="/saved-movies" className="header__burgerlink">Сохранённые фильмы</Link>
+          <Link to="/profile" className="header__burgerlink header__burgerlink-acc">Аккаунт</Link>
+        </div>
       </div>
     </header>
   );

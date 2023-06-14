@@ -7,13 +7,13 @@
 }
 
 .login__form {
-  margin-top: 70px;
-  margin-bottom: 16px;
+  margin: 70px 0 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 396px;
   height: 527px;
+  box-sizing: border-box;
 }
 
 .login__inputs {
@@ -103,8 +103,7 @@
 @media screen and (max-width: 550px) {
   .login__form {
     width: 260px;
-    margin-top: 56px;
-    margin-bottom: 14px;
+    margin: 56px 30px 14px;
   }
   .login__logo {
     align-self: center;

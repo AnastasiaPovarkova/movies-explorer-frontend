@@ -5,8 +5,8 @@ import './Login.css';
 
 function Login() {
   return (
-    <div className="login">
-      <form name="login__form" className="login__form" noValidate>
+    <section className="login">
+      <form name="login__form" className="login__form">
         <div className="login__inputs">
           <img className="login__logo" src={logo} alt="Movies Explorer" />
           <h2 className="login__title">Рады видеть!</h2>
@@ -38,7 +38,7 @@ function Login() {
         <h2 className="login__text">Ещё не зарегистрированы?</h2>
         <Link to="/signup" className="login__text login__link">Регистрация</Link>
       </div>
-    </div>
+    </section>
   );
 }
 

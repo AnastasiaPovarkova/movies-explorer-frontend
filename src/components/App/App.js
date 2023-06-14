@@ -15,11 +15,21 @@ export const UserContext = React.createContext();
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+
+  function handleBurgerClick() {
+    if (isBurgerMenuOpen) {
+      setIsBurgerMenuOpen(false);
+    } else setIsBurgerMenuOpen(true);
+  }
 
   return (
     <UserContext.Provider value={currentUser}>
       <div className="App__page">
-        <Header />
+        <Header 
+          handleBurgerClick={handleBurgerClick}
+          isBurgerOpen={isBurgerMenuOpen}
+        />
         <Routes>
           <Route
             path="/"
