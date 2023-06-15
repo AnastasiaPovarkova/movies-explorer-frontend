@@ -5,6 +5,10 @@
 .App__page {
   font-family: 'Inter';
   font-style: normal;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
   min-width: 320px;
   max-width: 100vw;
   margin: 0 auto 0;
