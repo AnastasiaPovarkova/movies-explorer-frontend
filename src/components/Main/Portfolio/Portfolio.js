@@ -3,7 +3,7 @@ import './Portfolio.css';
 
 function Portfolio() {
   return (
-    <div className="portfolio">
+    <section className="portfolio">
       <h2 className="portfolio__title"> Портфолио</h2>
       <a href="https://github.com/AnastasiaPovarkova/how-to-learn" className="portfolio__link" target="_blank" rel="noreferrer">
         <div className="portfolio__container">
@@ -23,7 +23,7 @@ function Portfolio() {
           <h2 className="portfolio__arrow">↗</h2>
         </div>
       </a>
-    </div>
+    </section>
   );
 }
 

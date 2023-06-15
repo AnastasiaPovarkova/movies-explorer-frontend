@@ -1,11 +1,11 @@
 import React from "react";
 import logo from "../../images/logo.svg";
 
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link, Routes, Route, useLocation } from 'react-router-dom';
 import './Header.css';
 
 function Header({handleBurgerClick, isBurgerOpen, onClose}) {
-
+  let location = useLocation();
   return (
     <header className="header">
       <div className="header__left">
@@ -18,8 +18,8 @@ function Header({handleBurgerClick, isBurgerOpen, onClose}) {
           <Routes>
             {["/movies", "/saved-movies", "/profile"].map((path) => (
               <Route path={path} element={<> 
-                <Link to="/movies" className="header__navlink header__navlink-500">Фильмы</Link>
-                <Link to="/saved-movies" className="header__navlink">Сохранённые фильмы</Link>
+                <Link to="/movies" className={`header__navlink ${(location.pathname === "/movies") ? "header__navlink-500" : ""}`}>Фильмы</Link>
+                <Link to="/saved-movies" className={`header__navlink ${(location.pathname === "/saved-movies") ? "header__navlink-500" : ""}`}>Сохранённые фильмы</Link>
               </>} />
             ))}
           </Routes>
@@ -45,9 +45,9 @@ function Header({handleBurgerClick, isBurgerOpen, onClose}) {
         </Routes>
         <div className={`header__back ${isBurgerOpen ? "header__burger-opened" : ""}`}></div> 
         <div className={`header__container ${isBurgerOpen ? "header__burger-opened" : ""}`}>
-          <Link to="/" className="header__burgerlink" onClick={onClose}>Главная</Link>
-          <Link to="/movies" className="header__burgerlink header__burgerlink-here" onClick={onClose}>Фильмы</Link>
-          <Link to="/saved-movies" className="header__burgerlink" onClick={onClose}>Сохранённые фильмы</Link>
+          <Link to="/" className={`header__burgerlink ${(location.pathname === "/") ? "header__burgerlink-here" : ""}`} onClick={onClose}>Главная</Link>
+          <Link to="/movies" className={`header__burgerlink ${(location.pathname === "/movies") ? "header__burgerlink-here" : ""}`} onClick={onClose}>Фильмы</Link>
+          <Link to="/saved-movies" className={`header__burgerlink ${(location.pathname === "/saved-movies") ? "header__burgerlink-here" : ""}`} onClick={onClose}>Сохранённые фильмы</Link>
           <Link to="/profile" className="header__burgerlink header__burgerlink-acc" onClick={onClose}>Аккаунт</Link>
         </div>
       </div>

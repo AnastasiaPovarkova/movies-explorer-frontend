@@ -2,16 +2,19 @@ import React from "react";
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard'
 
-function MoviesCardList(isSavedMovies) {
+function MoviesCardList() {
   return (
-    <div className="movies"> 
-      <MoviesCard isSavedMovies={isSavedMovies}/>
-      <MoviesCard isSavedMovies={isSavedMovies}/>
-      <MoviesCard isSavedMovies={isSavedMovies}/>
-      <MoviesCard isSavedMovies={isSavedMovies}/>
-      <MoviesCard isSavedMovies={isSavedMovies}/>
-      <MoviesCard isSavedMovies={isSavedMovies}/>
-    </div>
+    <section className="movies"> 
+      <MoviesCard/>
+      <MoviesCard/>
+      <MoviesCard/>
+      <MoviesCard/>
+      <MoviesCard/>
+      <MoviesCard/>
+      <MoviesCard/>
+      <MoviesCard/>
+      <MoviesCard/>
+    </section>
   );
 }
 

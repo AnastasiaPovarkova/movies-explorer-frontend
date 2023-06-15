@@ -1,6 +1,6 @@
 import './App.css';
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -12,6 +12,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import PageNotFound from "../PageNotFound/PageNotFound";
 export const UserContext = React.createContext();
+
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -42,7 +43,7 @@ function App() {
           />
           <Route
             path="/movies"
-            element={<> <Movies /> <Footer /> </>}
+            element={<> <Movies  /> <Footer /> </>}
           />
           <Route
             path="/saved-movies"

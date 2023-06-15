@@ -4,10 +4,10 @@ import NavTab from '../NavTab/NavTab';
 
 function Promo() {
   return (
-    <div className="promo">
+    <section className="promo">
       <h2 className="promo__title">Учебный проект студента факультета Веб-разработки.</h2>
       <NavTab />
-    </div>
+    </section>
   );
 }
 

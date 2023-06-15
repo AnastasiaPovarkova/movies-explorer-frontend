@@ -3,9 +3,9 @@ import './Futher.css'
 
 const Futher = () => {
   return (
-        <div class="futher">
+        <section class="futher">
             <button type="button" class="futher__button">Ещё</button>
-        </div>
+        </section>
     )
 };
 
