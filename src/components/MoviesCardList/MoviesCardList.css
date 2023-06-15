@@ -1,9 +1,27 @@
 .movies {
-  margin: 70px 70px 30px;
+  margin: 70px 70px 0;
+  padding-bottom: 30px;
   display: grid;
   grid-auto-rows: 271px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   column-gap: 24px;
   row-gap: 30px;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 880px) {
+  .movies {
+    margin: 70px 30px 0;
+    grid-auto-rows: 258px;
+    column-gap: 30px;
+    row-gap: 36px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .movies {
+    margin: 40px 10px 0;
+    grid-auto-rows: 236px;
+    row-gap: 16px;
+  }
 }

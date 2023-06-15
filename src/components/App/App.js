@@ -17,6 +17,10 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
+  function closeBurgerMenu() {
+    setIsBurgerMenuOpen(false);
+  }
+
   function handleBurgerClick() {
     if (isBurgerMenuOpen) {
       setIsBurgerMenuOpen(false);
@@ -29,6 +33,7 @@ function App() {
         <Header 
           handleBurgerClick={handleBurgerClick}
           isBurgerOpen={isBurgerMenuOpen}
+          onClose={closeBurgerMenu}
         />
         <Routes>
           <Route

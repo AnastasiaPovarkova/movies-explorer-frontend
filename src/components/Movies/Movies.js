@@ -7,7 +7,7 @@ function Movies() {
   return (
     <>
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList isSavedMovies={false}/>
       <Futher />
     </>
   );

@@ -8,7 +8,7 @@ function Login() {
     <section className="login">
       <form name="login__form" className="login__form">
         <div className="login__inputs">
-          <img className="login__logo" src={logo} alt="Movies Explorer" />
+          <Link className="login__logo" to="/"><img className="login__logo" src={logo} alt="Movies Explorer" /></Link>
           <h2 className="login__title">Рады видеть!</h2>
           <label for="email-field" className="login__lable">E-mail</label>
           <input 

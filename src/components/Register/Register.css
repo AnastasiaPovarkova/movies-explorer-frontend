@@ -1,14 +1,15 @@
 .register {
-  margin: 0 30px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  height: 100vh;
+  justify-content: start;
 }
   
 .register__form {
-  margin: 70px 0 16px;
+  margin: 34px 0 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -104,8 +105,7 @@
 @media screen and (max-width: 550px) {
   .register__form {
     width: 260px;
-    margin: 56px 30px 14px;
-    height: 100vh;
+    margin: 20px 30px 14px;
   }
   .register__logo {
     align-self: center;

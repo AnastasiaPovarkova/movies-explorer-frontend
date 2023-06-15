@@ -77,7 +77,7 @@
 .header__container {
   padding: 159px 0 90px;
   position: absolute;
-  background: #d7d2d2;
+  background: #FFFFFF;
   width: 520px;
   height: 100vh;
   right: 0;
@@ -88,6 +88,19 @@
   align-items: center;
   gap: 22px;
   box-sizing: border-box;
+  display: none;
+}
+
+.header__back {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  opacity: 0.3;
   display: none;
 }
 

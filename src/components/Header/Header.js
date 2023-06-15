@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 import { Link, Routes, Route } from 'react-router-dom';
 import './Header.css';
 
-function Header({handleBurgerClick, isBurgerOpen}) {
+function Header({handleBurgerClick, isBurgerOpen, onClose}) {
 
   return (
     <header className="header">
@@ -43,11 +43,12 @@ function Header({handleBurgerClick, isBurgerOpen}) {
             </>} />
           ))}
         </Routes>
+        <div className={`header__back ${isBurgerOpen ? "header__burger-opened" : ""}`}></div> 
         <div className={`header__container ${isBurgerOpen ? "header__burger-opened" : ""}`}>
-          <Link to="/" className="header__burgerlink">Главная</Link>
-          <Link to="/movies" className="header__burgerlink header__burgerlink-here">Фильмы</Link>
-          <Link to="/saved-movies" className="header__burgerlink">Сохранённые фильмы</Link>
-          <Link to="/profile" className="header__burgerlink header__burgerlink-acc">Аккаунт</Link>
+          <Link to="/" className="header__burgerlink" onClick={onClose}>Главная</Link>
+          <Link to="/movies" className="header__burgerlink header__burgerlink-here" onClick={onClose}>Фильмы</Link>
+          <Link to="/saved-movies" className="header__burgerlink" onClick={onClose}>Сохранённые фильмы</Link>
+          <Link to="/profile" className="header__burgerlink header__burgerlink-acc" onClick={onClose}>Аккаунт</Link>
         </div>
       </div>
     </header>

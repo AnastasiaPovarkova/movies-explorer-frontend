@@ -2,15 +2,15 @@ import React from "react";
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard'
 
-function MoviesCardList() {
+function MoviesCardList(isSavedMovies) {
   return (
     <div className="movies"> 
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
+      <MoviesCard isSavedMovies={isSavedMovies}/>
+      <MoviesCard isSavedMovies={isSavedMovies}/>
+      <MoviesCard isSavedMovies={isSavedMovies}/>
+      <MoviesCard isSavedMovies={isSavedMovies}/>
+      <MoviesCard isSavedMovies={isSavedMovies}/>
+      <MoviesCard isSavedMovies={isSavedMovies}/>
     </div>
   );
 }

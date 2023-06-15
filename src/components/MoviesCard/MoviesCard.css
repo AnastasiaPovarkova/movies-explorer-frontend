@@ -47,18 +47,37 @@
   align-self: start;
 }
 
-.movie__save {
+.movie__button {
   margin: 0;
   padding: 0;
   border: 0;
   width: 30px;
   height: 30px;
   background: rgba(255, 255, 255, 0);
-  background-image: url(../../images/button__save.svg);
   cursor: pointer;
   transition: opacity 0.3s;
 }
 
-.movie__save:hover {
+.movie__button:hover {
   opacity: 0.9;
+}
+
+.movie__save {
+  background-image: url(../../images/button__save.svg);
+}
+
+.movie__close {
+  background-image: url(../../images/movieclose.svg);
+}
+
+@media screen and (max-width: 880px) {
+  .movie__img {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .movie__img {
+    height: 168px;
+  }
 }
