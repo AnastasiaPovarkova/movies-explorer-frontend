@@ -9,15 +9,15 @@ function SearchForm() {
       <form className="search">
         <div className="search__searcher">
           <img className="search__loupe" src={loupe} alt="loupe" />
-          <input type="text" name="movie" placeholder="Фильм" class="search__input"></input>
-          <button class="search__submit"></button>
+          <input type="text" name="movie" placeholder="Фильм" className="search__input"></input>
+          <button className="search__submit"></button>
         </div>
         <div className="search__shorts">
           <FilterCheckbox />
           <h2 className="search__text">Короткометражки</h2>
         </div>
       </form>
-      <div className="search__line"></div>
+      <div className="search-line"></div>
     </>
   );
 }

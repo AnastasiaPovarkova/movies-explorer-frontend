@@ -20,7 +20,7 @@ function Register() {
             required
             name="name"
           />
-          <span className="profession-field-error register__span"></span>
+          <span className="name-field-error register__span"></span>
           <label for="email-field" className="register__lable">E-mail</label>
           <input 
             type="email" 
@@ -30,7 +30,7 @@ function Register() {
             maxLength="50" 
             required 
             name="email"/>
-          <span className="name-field-error register__span"></span>
+          <span className="email-field-error register__span"></span>
           <label for="password-field" className="register__lable">Пароль</label>
           <input
             type="text"
@@ -41,7 +41,7 @@ function Register() {
             required
             name="password"
           />
-          <span className="profession-field-error register__span"></span>
+          <span className="password-field-error register__span"></span>
         </div>
         <button type="submit" className="register__submit" name="submit" defaultValue="Зарегистрироваться">Зарегистрироваться</button>
       </form>

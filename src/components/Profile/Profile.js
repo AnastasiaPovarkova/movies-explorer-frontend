@@ -21,7 +21,7 @@ function Profile() {
               defaultValue="Виталий"
               disabled
             />
-            <span className="profession-field-error profile__span"></span>
+            <span className="name-field-error profile__span"></span>
           </div>
           <div className="profile__input">
             <label for="email-field" className="profile__lable">E-mail</label>
@@ -36,7 +36,7 @@ function Profile() {
               defaultValue="pochta@yandex.ru"
               disabled
             />
-            <span className="name-field-error profile__span"></span>
+            <span className="email-field-error profile__span"></span>
           </div>
         </div>
         <button type="submit" className="profile__submit" name="submit" defaultValue="Сохранить">Сохранить</button>

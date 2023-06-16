@@ -11,7 +11,7 @@ function Portfolio() {
           <h2 className="portfolio__arrow">↗</h2>
         </div>
       </a>
-      <a href="https://anastasiapovarkova.github.io/russian-travel/" className="portfolio__link" target="_blank" rel="noreferrer">
+      <a href="https://anastasiapovarkova.github.io/russian-travel" className="portfolio__link" target="_blank" rel="noreferrer">
         <div className="portfolio__container">
           <h2 className="portfolio__text">Адаптивный сайт</h2>
           <h2 className="portfolio__arrow">↗</h2>
