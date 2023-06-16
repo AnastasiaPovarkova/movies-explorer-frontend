@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import logo from "../../images/logo.svg";
 
 import { Link, Routes, Route, useLocation } from 'react-router-dom';
@@ -6,6 +7,15 @@ import './Header.css';
 
 function Header({handleBurgerClick, isBurgerOpen, onClose}) {
   let location = useLocation();
+
+  useEffect(() => {
+    if (isBurgerOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isBurgerOpen]);
+
   return (
     <header className="header">
       <div className="header__left">
