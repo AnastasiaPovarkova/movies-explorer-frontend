@@ -31,6 +31,8 @@
   font-size: 18px;
   line-height: 20px;
   color: #000;
+  border-radius: 5px;
+  height: 100%;
 }
 
 .search__input::placeholder {
@@ -40,8 +42,13 @@
   color: #A0A0A0;
 }
 
+.search__input:focus {
+  outline: 2px solid #bcbdc3;
+}
+
 .search__submit {
   margin-right: 30px;
+  margin-left: 10px;
   padding: 0;
   border: 0;
   width: 34px;

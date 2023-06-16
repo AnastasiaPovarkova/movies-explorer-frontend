@@ -54,6 +54,10 @@
   color: #000000;
 }
 
+.register__field:focus {
+  outline: -webkit-focus-ring-color 2px solid #3456F3;
+}
+
 .register__span {
   margin: 8px 0 8px;
   height: 12px;
