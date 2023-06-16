@@ -52,6 +52,10 @@
   cursor: pointer;
 }
 
+.search__submit:hover {
+  opacity: 0.8;
+}
+
 .search__shorts {
   padding: 0 30px 0 29px;
   height: 40px;
