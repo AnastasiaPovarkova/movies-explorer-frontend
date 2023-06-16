@@ -30,13 +30,13 @@ function App() {
 
   return (
     <UserContext.Provider value={currentUser}>
-      <div className="App-page">
+      <div className="app">
         <Header 
           handleBurgerClick={handleBurgerClick}
           isBurgerOpen={isBurgerMenuOpen}
           onClose={closeBurgerMenu}
         />
-        <main>
+        <main className="app__main">
         <Routes>
           <Route
             path="/"

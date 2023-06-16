@@ -21,6 +21,7 @@
 .login__inputs {
   display: flex;
   flex-direction: column;
+  align-items: start;
 }
 
 .login__logo {
@@ -46,6 +47,7 @@
 .login__field {
   margin-top: 5px;
   height: 27px;
+  width: 100%;
   border: none;
   border-bottom: 1px solid #E8E8E8;
   font-weight: 500;
@@ -104,6 +106,15 @@
 .login__link {
   color: #3456F3;
   text-decoration: none;
+}
+
+@media screen and (max-width: 850px) {
+  .login__form {
+    width: 390px;
+  }
+  .login__submit {
+    width: 390px;
+  }
 }
 
 @media screen and (max-width: 550px) {
