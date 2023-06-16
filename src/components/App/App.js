@@ -36,18 +36,19 @@ function App() {
           isBurgerOpen={isBurgerMenuOpen}
           onClose={closeBurgerMenu}
         />
+        <main>
         <Routes>
           <Route
             path="/"
-            element={<> <Main /> <Footer /> </>}
+            element={<Main />}
           />
           <Route
             path="/movies"
-            element={<> <Movies  /> <Footer /> </>}
+            element={<Movies  />}
           />
           <Route
             path="/saved-movies"
-            element={<> <SavedMovies /> <Footer /> </>}
+            element={<SavedMovies />}
           />
           <Route
             path="/profile"
@@ -63,6 +64,8 @@ function App() {
           />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+        </main>
+        <Footer />
       </div>
     </UserContext.Provider>
   );
