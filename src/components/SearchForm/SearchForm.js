@@ -9,7 +9,7 @@ function SearchForm() {
       <form className="search">
         <div className="search__searcher">
           <img className="search__loupe" src={loupe} alt="loupe" />
-          <input type="text" name="movie" placeholder="Фильм" className="search__input"></input>
+          <input type="text" name="movie" placeholder="Фильм" className="search__input" required></input>
           <button className="search__submit"></button>
         </div>
         <div className="search__shorts">
