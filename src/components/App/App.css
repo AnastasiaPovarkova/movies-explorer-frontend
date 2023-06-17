@@ -1,0 +1,16 @@
+.app {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  text-align: center;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  min-width: 320px;
+  max-width: 1090px;
+  margin: 0 auto 0;
+}
+
+.app__main {
+  margin: 0 auto 0;
+}

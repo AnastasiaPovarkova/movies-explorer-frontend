@@ -1,0 +1,140 @@
+.search {
+  margin: 70px 70px 0;
+  height: 72px;
+  background: #F9F9F9;
+  border-radius: 9px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.search__searcher {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.search__loupe {
+  margin: 19px 10px 19px 19px;
+  width: 34px;
+  height: 34px;
+}
+
+.search__input {
+  all: unset;
+  flex: 1;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #000;
+  border-radius: 5px;
+  height: 100%;
+  text-align: start;
+}
+
+.search__input::placeholder {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #A0A0A0;
+  text-align: start;
+}
+
+.search__input:focus {
+  outline: 2px solid #bcbdc3;
+}
+
+.search__submit {
+  margin-right: 30px;
+  margin-left: 10px;
+  padding: 0;
+  border: 0;
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0);
+  background-image: url(../../images/button__find.svg);
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.search__submit:hover {
+  opacity: 0.8;
+}
+
+.search__shorts {
+  padding: 0 30px 0 29px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  column-gap: 14px;
+  border-left: 1px solid #E8E8E8;;
+}
+
+.search__text {
+  margin: 0;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: #000000;
+  align-self: center;
+}
+
+.search-line {
+  padding-bottom: 69px;
+  margin: 0 70px 10px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+@media screen and (max-width: 880px) {
+  .search {
+    margin: 80px 30px 0;
+  }
+  .search-line {
+    padding-bottom: 109px;
+    margin: 0 30px 10px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .search__loupe {
+    display: none;
+  }
+  .search {
+    margin: 80px 10px 0;
+    height: 144px;
+    flex-direction: column;
+    background: #FFFFFF;
+  }
+  .search__searcher {
+    height: 72px;
+    background: #F9F9F9;
+    border-radius: 9px;
+  }
+  .search__input {
+    margin-left: 19px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .search__input::placeholder {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .search__shorts {
+    height: 72px;
+    border: none;
+  }
+  .search__submit {
+    margin-right: 19px;
+  }
+  .search-line {
+    padding-bottom: 44px;
+    margin: 0 14px 10px;
+  }
+}
