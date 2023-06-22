@@ -3,8 +3,8 @@ import './Futher.css'
 
 const Futher = () => {
   return (
-        <section class="futher">
-            <button type="button" class="futher__button">Ещё</button>
+        <section className="futher">
+            <button type="button" className="futher__button">Ещё</button>
         </section>
     )
 };

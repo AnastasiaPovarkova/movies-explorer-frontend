@@ -1,16 +1,15 @@
 import React from "react";
 import './MoviesCard.css';
-import movie1 from "../../images/movie1.png";
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard() {
+function MoviesCard(props) {
   let location = useLocation();
   return (
     <section className="movie"> 
       <div className="movie__container"> 
         <div className="movie__info">
-          <h2 className="movie__name">33 слова о дизайне</h2>
-          <h2 className="movie__duration">1ч 47м</h2>
+          <h2 className="movie__name">{props.movie.nameRU}</h2>
+          <h2 className="movie__duration">{props.movie.duration} мин</h2>
         </div>
         <button  
           type="button" 
@@ -18,7 +17,9 @@ function MoviesCard() {
           className={`movie__button ${(location.pathname === "/movies") ? "movie__save" : "movie__close"}`}
         />
       </div> 
-      <img className="movie__img" src={movie1} alt="movieimage" />
+      <a href={props.movie.trailerLink} target="_blank" rel="noreferrer">
+        <img className="movie__img" src={`https://api.nomoreparties.co/${props.movie.image.url}`} alt="movieimage" />
+      </a>
     </section>
   );
 }
