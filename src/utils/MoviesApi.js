@@ -14,8 +14,15 @@ class MoviesApi {
   _request(url, options) {
     return fetch(url, options).then(this._getResponseData);
   }
+
+  getUserInfo = () => {
+    return this._request(`${this._baseUrl}/users/me`, {
+      method: "GET",
+      headers: this._headers,
+    });
+  };
   
-  saveMovie = (movie) => {
+  saveMovie = (props) => {
     return this._request(`${this._baseUrl}/movies`, {
       method: "POST",
         headers: this._headers,
@@ -23,7 +30,7 @@ class MoviesApi {
     };
     
   deleteMovie = (movieId) => {
-    return this._request(`${this._baseUrl}/cards/${movieId}`, {
+    return this._request(`${this._baseUrl}/movies/${movieId}`, {
       method: "DELETE",
       headers: this._headers,
       });

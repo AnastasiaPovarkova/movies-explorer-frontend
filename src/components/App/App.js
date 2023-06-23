@@ -2,6 +2,7 @@ import './App.css';
 import React from "react";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -12,16 +13,91 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import mainApi from "../../utils/MainApi";
+import moviesApi from "../../utils/MoviesApi";
+import auth from "../../utils/Auth";
+import ProtectedRoute from "../../utils/ProtectedRoute";
 export const UserContext = React.createContext();
-
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [filterMovies, setFilterMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFilterChecked, setIsFilterChecked] = useState(false);
   const [isInput, setIsInput] = useState(false);
+  const [savedMovies, setSavedMovies] = useState([]);
+
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   moviesApi.getUserInfo()
+  //     .then((data) => {
+  //       setCurrentUser(data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
+
+  // useEffect(() => {
+  //   handleTokenCheck();
+  // }, []);
+
+  const handleTokenCheck = () => {
+    //Проверка наличия токена в localStorage
+    if (localStorage.getItem("jwt")) {
+      auth
+        .checkToken(localStorage.getItem("jwt"))
+        .then((res) => {
+          console.log(res);
+          if (res) {
+            setLoggedIn(true);
+            setUserEmail(res.email);
+            navigate("/movies", { replace: true });
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  function handleRegister(formValue) {
+    setIsAuthLoading(true);
+    auth
+      .register(formValue.email, formValue.password, formValue.name)
+      .then((res) => {
+        if (res) {
+          navigate("/signin", { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setIsAuthLoading(false));
+  }
+
+  function handleLogin(formValue) {
+    setIsAuthLoading(true);
+    Promise.all([
+      auth.checkToken(localStorage.getItem("jwt")),
+      auth.authorize(formValue.email, formValue.password)
+    ])
+      .then(([data, res]) => {
+        if (data) {
+          console.log('In Login: ', data);
+          setUserEmail(data.data.email);
+        }
+        if (res.token) {
+          console.log('In login res: ', res);
+          setLoggedIn(true);
+          navigate("/movies", { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setIsAuthLoading(false));
+  }
 
   function closeBurgerMenu() {
     setIsBurgerMenuOpen(false);
@@ -57,9 +133,34 @@ function App() {
         } else {
           setFilterMovies(data.filter(movie => movie.nameRU.toLowerCase().includes(input.input.toLowerCase())));
         };
+        if (savedMovies) {
+          filterMovies.forEach(filterMovie => { 
+            savedMovies.forEach(savedMovie => {
+              if (filterMovie.movieId === savedMovie.id) {
+                filterMovie.isSaved = true;
+              }
+            })
+          })
+        }
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
+  }
+
+  function handleSaveMovie(movie) {
+    if (movie.isSaved) {
+      console.log('unsaved');
+      movie.isSaved = false;
+    } else {
+      // moviesApi.saveMovie(movie)
+      //   .then((data) => {
+      //     setSavedMovies(data);
+      //     console.log(data);
+      //   })
+      //   .catch((err) => console.log(err));
+      console.log('saved');
+      movie.isSaved = true;
+    }
   }
 
   return (
@@ -78,30 +179,48 @@ function App() {
           />
           <Route
             path="/movies"
-            element={<Movies 
-                        isLoading = {isLoading}
-                        foundMovies={filterMovies}
-                        onFilterCheckbox={handleFilterCheck}
-                        onMovieSearch={handleMovieSearch} 
-                        isChecked={isFilterChecked}
-                        setIsChecked={setIsFilterChecked}
-                    />}
+            element={
+              <ProtectedRoute 
+                element={<Movies />}
+                isLoading = {isLoading}
+                foundMovies={filterMovies}
+                onFilterCheckbox={handleFilterCheck}
+                onMovieSearch={handleMovieSearch} 
+                isChecked={isFilterChecked}
+                setIsChecked={setIsFilterChecked}
+                onSaveMovie={handleSaveMovie}
+              />
+            }
           />
           <Route
             path="/saved-movies"
-            element={<SavedMovies />}
+            element={
+              <ProtectedRoute 
+              element={<SavedMovies />}
+              />
+            }
           />
           <Route
             path="/profile"
-            element={<> <Profile /> </>}
+            element={
+              <ProtectedRoute 
+              element={<Profile />}
+              />
+            }
           />
           <Route
             path="/signup"
-            element={<Register />}
+            element={<Register 
+              handleRegister={handleRegister}
+              isAuthLoading={isAuthLoading}
+            />}
           />
           <Route
             path="/signin"
-            element={<Login />}
+            element={<Login 
+              handleLogin={handleLogin} 
+              isAuthLoading={isAuthLoading}
+            />}
           />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

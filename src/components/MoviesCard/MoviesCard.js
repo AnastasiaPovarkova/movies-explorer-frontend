@@ -4,6 +4,14 @@ import { useLocation } from 'react-router-dom';
 
 function MoviesCard(props) {
   let location = useLocation();
+
+  let ButtonSaveClass = `${(props.movie.isSaved) ? "movie__saved" : "movie__save"}`;
+
+  function handleSaveMovie(e) {
+    e.preventDefault();
+    props.onSaveMovie(props.movie);
+  }
+
   return (
     <section className="movie"> 
       <div className="movie__container"> 
@@ -14,7 +22,13 @@ function MoviesCard(props) {
         <button  
           type="button" 
           aria-label="Сохранить" 
-          className={`movie__button ${(location.pathname === "/movies") ? "movie__save" : "movie__close"}`}
+          className={`movie__button ${(location.pathname === "/movies") ? ButtonSaveClass : "movie__hidden"}`}
+          onClick={handleSaveMovie}
+        />
+        <button  
+          type="button" 
+          aria-label="Сохранить" 
+          className={`movie__button ${(location.pathname === "/saved-movies") ? "movie__close" : "movie__hidden"}`}
         />
       </div> 
       <a href={props.movie.trailerLink} target="_blank" rel="noreferrer">

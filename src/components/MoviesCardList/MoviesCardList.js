@@ -12,6 +12,7 @@ function MoviesCardList(props) {
             <MoviesCard
               key={movie._id}
               movie={movie}
+              onSaveMovie={props.onSaveMovie}
             />
           );
         })}

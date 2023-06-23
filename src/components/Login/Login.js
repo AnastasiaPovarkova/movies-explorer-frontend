@@ -1,12 +1,25 @@
 import React from "react";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
+import useForm from "../../hooks/useForm";
 import './Login.css';
 
-function Login() {
+function Login(props) {
+  const {formValue, error, handleChange, resetValidation} = useForm();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.handleLogin(formValue);
+    resetValidation();
+  }
+
   return (
     <section className="login">
-      <form name="login__form" className="login__form">
+      <form 
+        name="login__form" 
+        className="login__form"
+        onSubmit={handleSubmit}
+      >
         <div className="login__inputs">
           <Link className="login__logo" to="/"><img className="login__logo" src={logo} alt="Movies Explorer" /></Link>
           <h2 className="login__title">Рады видеть!</h2>
@@ -18,8 +31,11 @@ function Login() {
             minLength="2" 
             maxLength="50" 
             required 
-            name="email"/>
-          <span className="name-field-error login__span"></span>
+            name="email"
+            value={formValue.email || ''}
+            onChange={handleChange}
+          />
+          <span className="name-field-error login__span">{error.email || ''}</span>
           <label for="password-field" className="login__lable">Пароль</label>
           <input
             type="text"
@@ -29,10 +45,19 @@ function Login() {
             maxLength="40"
             required
             name="password"
+            value={formValue.password || ''}
+            onChange={handleChange}
           />
-          <span className="profession-field-error login__span"></span>
+          <span className="profession-field-error login__span">{error.password || ''}</span>
         </div>
-        <button type="submit" className="login__submit" name="submit" defaultValue="Войти">Войти</button>
+        <button 
+          type="submit" 
+          className="login__submit" 
+          name="submit" 
+          defaultValue="Войти"
+        >
+          {props.isAuthLoading ? "Вход..." : "Войти"}
+        </button>
       </form>
       <div className="login__bottom">
         <h2 className="login__text">Ещё не зарегистрированы?</h2>

@@ -20,6 +20,7 @@
 
 .movie__info {
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: left;
   align-items: center;
@@ -34,6 +35,10 @@
   font-size: 15px;
   line-height: 18px;
   color: #000000;
+  overflow: hidden;
+  text-overflow: hidden;
+  text-align: left;
+  align-self: start;
 }
 
 .movie__duration {
@@ -66,8 +71,18 @@
   background-image: url(../../images/button__save.svg);
 }
 
+.movie__saved {
+  background-image: url(../../images/saved.svg);
+}
+
 .movie__close {
   background-image: url(../../images/movieclose.svg);
+}
+
+.movie__hidden {
+  background-image: none;
+  width: 0;
+  height: 0;
 }
 
 @media screen and (max-width: 880px) {

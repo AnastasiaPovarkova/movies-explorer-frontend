@@ -12,7 +12,7 @@ function Movies(props) {
         isChecked={props.isChecked} 
         setIsChecked={props.setIsChecked}
         onFilterCheckbox={props.onFilterCheckbox}/>
-      <MoviesCardList isLoading={props.isLoading} movies={props.foundMovies}/>
+      <MoviesCardList isLoading={props.isLoading} movies={props.foundMovies} onSaveMovie={props.onSaveMovie}/>
       <Futher />
     </>
   );
