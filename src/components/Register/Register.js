@@ -54,7 +54,7 @@ function Register(props) {
             type="text"
             id="password-field"
             className="register__field"
-            minLength="2"
+            minLength="8"
             maxLength="40"
             required
             name="password"

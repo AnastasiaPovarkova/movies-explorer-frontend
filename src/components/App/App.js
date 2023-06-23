@@ -16,7 +16,7 @@ import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import auth from "../../utils/Auth";
 import ProtectedRoute from "../../utils/ProtectedRoute";
-export const UserContext = React.createContext();
+import { UserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -32,34 +32,30 @@ function App() {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   moviesApi.getUserInfo()
-  //     .then((data) => {
-  //       setCurrentUser(data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
+  useEffect(() => {
+    moviesApi.getUserInfo()
+      .then((data) => {
+        setCurrentUser(data.user);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-  // useEffect(() => {
-  //   handleTokenCheck();
-  // }, []);
+  useEffect(() => {
+    handleTokenCheck();
+  }, []);
 
   const handleTokenCheck = () => {
-    //Проверка наличия токена в localStorage
-    if (localStorage.getItem("jwt")) {
-      auth
-        .checkToken(localStorage.getItem("jwt"))
-        .then((res) => {
-          console.log(res);
-          if (res) {
-            setLoggedIn(true);
-            setUserEmail(res.email);
-            navigate("/movies", { replace: true });
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-  };
+    auth
+      .checkToken()
+      .then((res) => {
+        if (res) {
+          setLoggedIn(true);
+          setUserEmail(res.user.email);
+          navigate("/movies", { replace: true });
+        }
+      })
+      .catch((err) => console.log(err));
+};
 
   function handleRegister(formValue) {
     setIsAuthLoading(true);
@@ -78,17 +74,13 @@ function App() {
 
   function handleLogin(formValue) {
     setIsAuthLoading(true);
-    Promise.all([
-      auth.checkToken(localStorage.getItem("jwt")),
-      auth.authorize(formValue.email, formValue.password)
-    ])
-      .then(([data, res]) => {
+    auth
+      .authorize(formValue.email, formValue.password)
+      .then((data) => {
+        console.log('Data in Login: ', data);
         if (data) {
-          console.log('In Login: ', data);
-          setUserEmail(data.data.email);
-        }
-        if (res.token) {
-          console.log('In login res: ', res);
+          console.log('Data.email in Login: ', data.email);
+          setUserEmail(data.email);
           setLoggedIn(true);
           navigate("/movies", { replace: true });
         }
@@ -170,6 +162,7 @@ function App() {
           handleBurgerClick={handleBurgerClick}
           isBurgerOpen={isBurgerMenuOpen}
           onClose={closeBurgerMenu}
+          loggedIn={loggedIn}
         />
         <main className="app__main">
         <Routes>
@@ -181,7 +174,7 @@ function App() {
             path="/movies"
             element={
               <ProtectedRoute 
-                element={<Movies />}
+                element={Movies}
                 isLoading = {isLoading}
                 foundMovies={filterMovies}
                 onFilterCheckbox={handleFilterCheck}
@@ -189,6 +182,7 @@ function App() {
                 isChecked={isFilterChecked}
                 setIsChecked={setIsFilterChecked}
                 onSaveMovie={handleSaveMovie}
+                loggedIn={loggedIn}
               />
             }
           />
@@ -196,7 +190,8 @@ function App() {
             path="/saved-movies"
             element={
               <ProtectedRoute 
-              element={<SavedMovies />}
+                element={SavedMovies}
+                loggedIn={loggedIn}
               />
             }
           />
@@ -204,7 +199,8 @@ function App() {
             path="/profile"
             element={
               <ProtectedRoute 
-              element={<Profile />}
+                element={Profile}
+                loggedIn={loggedIn}
               />
             }
           />
