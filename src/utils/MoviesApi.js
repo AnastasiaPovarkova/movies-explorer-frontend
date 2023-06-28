@@ -19,22 +19,46 @@ class MoviesApi {
     return this._request(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: this._headers,
+      credentials: "include",
     });
   };
+
+  getSavedMovies = () => {
+    return this._request(`${this._baseUrl}/movies`, {
+      method: "GET",
+      headers: this._headers,
+      credentials: "include",
+    });
+  }
   
   saveMovie = (props) => {
     return this._request(`${this._baseUrl}/movies`, {
       method: "POST",
         headers: this._headers,
-      });
-    };
+        body: JSON.stringify({
+          country: props.country,
+          director: props.director,
+          duration: props.duration,
+          year: props.year,
+          description: props.description,
+          image: props.image,
+          trailerLink: props.trailerLink,
+          nameRU: props.nameRU,
+          nameEN: props.nameEN,
+          thumbnail: props.thumbnail,
+          movieId: props.id,
+        }),
+        credentials: "include",
+    });
+  };
     
   deleteMovie = (movieId) => {
     return this._request(`${this._baseUrl}/movies/${movieId}`, {
       method: "DELETE",
       headers: this._headers,
-      });
-    };
+      credentials: "include",
+    });
+  };
 
 }
   
@@ -42,6 +66,7 @@ const moviesApi = new MoviesApi({
   baseUrl: "https://api.diploma.anstpov.nomoredomains.rocks",
   headers: {
     "Content-Type": "application/json",
+    "Accept": "application/json",
   },
 });
   

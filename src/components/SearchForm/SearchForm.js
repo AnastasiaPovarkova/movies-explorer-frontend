@@ -32,6 +32,7 @@ function SearchForm(props) {
             name="movie" 
             value={formValue.movie || ''}
             onChange={handleChange}
+            minLength="1"
             placeholder="Фильм" 
             className="search__input" 
             required>

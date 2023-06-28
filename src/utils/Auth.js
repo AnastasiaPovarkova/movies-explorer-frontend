@@ -24,7 +24,31 @@ class Auth {
     });
   };
   
-  authorize = ( email, password ) => {
+  // _makeRequest = (url, endpoint, method, credentials, body) => {
+  //   const headers = { "Content-Type": "application/json" };
+  //   const config = { method, headers };
+  //   if (credentials) {
+  //     config.credentials = "include";
+  //   }
+  //   if (body !== undefined) {
+  //     config.body = JSON.stringify(body);
+  //   }
+  //   return fetch(`${url}${endpoint}`, config).then((res) => {
+  //     const result = res.json();
+  //     return res.ok
+  //       ? result
+  //       : result.then((err) => Promise.reject(`${err.message}`));
+  //   });
+  // }
+
+  // authorize = (email, password) => {
+  //   return this._makeRequest(this._baseUrl, "/signin", "POST", true, {
+  //     email,
+  //     password,
+  //   });
+  // }
+
+  authorize = (email, password) => {
     return this._request(`${this._baseUrl}/signin`, {
       method: "POST",
       headers: this._headers,
@@ -35,20 +59,21 @@ class Auth {
     });
   };
   
-  checkToken = (token) => {
+  checkToken = () => {
     return this._request(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: this._headers,
       credentials: "include",
     });
   };
+
 }
   
 const auth = new Auth({
   BASE_URL: "https://api.diploma.anstpov.nomoredomains.rocks",
   headers: {
-    "Content-Type": "application/json",
     "Accept": "application/json",
+    "Content-Type": "application/json",
   },
 });
   

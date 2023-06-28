@@ -2,7 +2,7 @@ import './App.css';
 import React from "react";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -22,7 +22,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [filterMovies, setFilterMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,9 +32,10 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    moviesApi.getUserInfo()
-      .then((data) => {
+    Promise.all([moviesApi.getUserInfo(), moviesApi.getSavedMovies()])
+      .then(([data, movies]) => {
         setCurrentUser(data.user);
+        setSavedMovies(movies);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -50,12 +50,11 @@ function App() {
       .then((res) => {
         if (res) {
           setLoggedIn(true);
-          setUserEmail(res.user.email);
           navigate("/movies", { replace: true });
         }
       })
       .catch((err) => console.log(err));
-};
+  };
 
   function handleRegister(formValue) {
     setIsAuthLoading(true);
@@ -79,8 +78,6 @@ function App() {
       .then((data) => {
         console.log('Data in Login: ', data);
         if (data) {
-          console.log('Data.email in Login: ', data.email);
-          setUserEmail(data.email);
           setLoggedIn(true);
           navigate("/movies", { replace: true });
         }
@@ -143,17 +140,24 @@ function App() {
     if (movie.isSaved) {
       console.log('unsaved');
       movie.isSaved = false;
+      moviesApi.deleteMovie(movie.id)
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((err) => console.log(err));
     } else {
-      // moviesApi.saveMovie(movie)
-      //   .then((data) => {
-      //     setSavedMovies(data);
-      //     console.log(data);
-      //   })
-      //   .catch((err) => console.log(err));
+      moviesApi.saveMovie(movie)
+        .then((data) => {
+          setSavedMovies(data);
+          // setFilterMovies()
+          console.log('moviesApi.saveMovie: ', data);
+        })
+        .catch((err) => console.log(err));
       console.log('saved');
       movie.isSaved = true;
     }
   }
+
 
   return (
     <UserContext.Provider value={currentUser}>
@@ -191,6 +195,7 @@ function App() {
             element={
               <ProtectedRoute 
                 element={SavedMovies}
+                foundMovies={savedMovies}
                 loggedIn={loggedIn}
               />
             }

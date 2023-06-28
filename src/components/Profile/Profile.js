@@ -1,13 +1,16 @@
 import React from "react";
+import { useContext } from 'react';
 import { Link } from "react-router-dom";
+import { UserContext } from "../../contexts/CurrentUserContext";
 import './Profile.css';
 
-function Profile() {
+function Profile(props) {
+  const currentUser = useContext(UserContext);
   return (
     <section className="profile">
       <form name="profile__form" className="profile__form">
         <div className="profile__inputs">
-          <h2 className="profile__title">Привет, Виталий!</h2>
+          <h2 className="profile__title">Привет, {currentUser.name}!</h2>
           <div className="profile__input"> 
             <label for="name-field" className="profile__lable">Имя</label>
             <input
@@ -18,9 +21,10 @@ function Profile() {
               maxLength="40"
               required
               name="name"
-              defaultValue="Виталий"
+              value={currentUser.name || ''}
               disabled
-            />
+            >
+            </input>
             <span className="name-field-error profile__span"></span>
           </div>
           <div className="profile__input">
@@ -33,9 +37,10 @@ function Profile() {
               maxLength="50" 
               required 
               name="email"
-              defaultValue="pochta@yandex.ru"
+              value={currentUser.email || ''}
               disabled
-            />
+            >
+            </input>
             <span className="email-field-error profile__span"></span>
           </div>
         </div>
