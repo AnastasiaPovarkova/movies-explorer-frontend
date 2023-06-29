@@ -84,9 +84,14 @@
   color: #FFFFFF;
 }
 
-.register__submit:hover {
-  opacity: 0.8;
+.register__submit-disabled {
+  background-color: grey;
+  cursor: default;
 }
+
+/* .register__submit:hover {
+  opacity: 0.8;
+} */
 
 .register__bottom {
   display: flex;

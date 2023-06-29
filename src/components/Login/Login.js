@@ -5,7 +5,7 @@ import useForm from "../../hooks/useForm";
 import './Login.css';
 
 function Login(props) {
-  const {formValue, error, handleChange, resetValidation} = useForm();
+  const {formValue, error, handleChange, resetValidation, isValid} = useForm();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -41,7 +41,7 @@ function Login(props) {
             type="text"
             id="password-field"
             className="login__field"
-            minLength="2"
+            minLength="8"
             maxLength="40"
             required
             name="password"
@@ -52,7 +52,7 @@ function Login(props) {
         </div>
         <button 
           type="submit" 
-          className="login__submit" 
+          className={`login__submit ${(isValid) ? '' : 'login__submit-disabled'}`}
           name="submit" 
           defaultValue="Войти"
         >

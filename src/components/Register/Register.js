@@ -5,7 +5,7 @@ import useForm from "../../hooks/useForm";
 import './Register.css';
 
 function Register(props) {
-  const {formValue, error, handleChange, resetValidation} = useForm();
+  const {formValue, error, handleChange, resetValidation, isValid} = useForm();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -65,7 +65,7 @@ function Register(props) {
         </div>
         <button 
           type="submit" 
-          className="register__submit" 
+          className={`register__submit ${(isValid) ? '' : 'register__submit-disabled'}`}
           name="submit" 
           defaultValue="Зарегистрироваться"
         >

@@ -84,9 +84,14 @@
   color: #FFFFFF;
 }
 
-.login__submit:hover {
-  opacity: 0.8;
+.login__submit-disabled {
+  background-color: grey;
+  cursor: default;
 }
+
+/* .login__submit:hover {
+  opacity: 0.8;
+} */
 
 .login__bottom {
   display: flex;
