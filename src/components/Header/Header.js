@@ -5,7 +5,7 @@ import logo from "../../images/logo.svg";
 import { Link, Routes, Route, useLocation } from 'react-router-dom';
 import './Header.css';
 
-function Header({handleBurgerClick, isBurgerOpen, onClose}) {
+function Header({handleBurgerClick, isBurgerOpen, onClose, loggedIn}) {
   let location = useLocation();
 
   useEffect(() => {

@@ -18,8 +18,8 @@ function MoviesCard(props) {
   }
 
   return (
-    <section className="movie"> 
-      <div className="movie__container"> 
+    <section className="movie">
+      <div className="movie__container">
         <div className="movie__info">
           <h2 className="movie__name">{props.movie.nameRU}</h2>
           <h2 className="movie__duration">{props.movie.duration} мин</h2>

@@ -1,11 +1,11 @@
-import React from "react";
 import { useContext } from 'react';
-import { Link } from "react-router-dom";
 import { UserContext } from "../../contexts/CurrentUserContext";
+import useForm from "../../hooks/useForm";
 import './Profile.css';
 
 function Profile(props) {
   const currentUser = useContext(UserContext);
+  const {formValue, error, handleChange, resetValidation, isValid} = useForm();
 
   function handleLogout(e) {
     e.preventDefault();
@@ -27,8 +27,8 @@ function Profile(props) {
               maxLength="40"
               required
               name="name"
-              value={currentUser.name || ''}
-              disabled
+              value={currentUser.name || formValue.name}
+              disabled={true}
             >
             </input>
             <span className="name-field-error profile__span"></span>
@@ -43,8 +43,8 @@ function Profile(props) {
               maxLength="50" 
               required 
               name="email"
-              value={currentUser.email || ''}
-              disabled
+              value={currentUser.email || formValue.email}
+              disabled={true}
             >
             </input>
             <span className="email-field-error profile__span"></span>
@@ -53,18 +53,21 @@ function Profile(props) {
         <button type="submit" className="profile__submit" name="submit" defaultValue="Сохранить">Сохранить</button>
       </form>
       <div className="profile__bottom">
-        <Link className="profile__link">Редактировать</Link>
+        <button 
+          className="profile__link"
+          // onClick={}
+          >
+            Редактировать
+          </button>
         <button 
           className="profile__link profile__link-red"
           onClick={handleLogout}
           >
             Выйти из аккаунта
           </button>
-        {/* <Link 
-          to="/signup" 
-          className="profile__link profile__link-red"
-          onClick={handleLogout}
-        >Выйти из аккаунта</Link> */}
+          <button>
+            Сохранить
+          </button>
       </div>
     </section>
   );

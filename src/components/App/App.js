@@ -26,7 +26,7 @@ function App() {
   const [filterMovies, setFilterMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFilterChecked, setIsFilterChecked] = useState(false);
-  const [isInput, setIsInput] = useState(false);
+  const [isInput, setIsInput] = useState('');
   const [savedMovies, setSavedMovies] = useState([]);
   const currentUrl = useLocation.pathname;
 
@@ -77,7 +77,6 @@ function App() {
     auth
       .authorize(formValue.email, formValue.password)
       .then((data) => {
-        console.log('Data in Login: ', data);
         if (data) {
           setLoggedIn(true);
           navigate("/movies", { replace: true });
@@ -100,17 +99,35 @@ function App() {
   }
 
   function handleFilterCheck(checked) {
-    setIsLoading(true);
-    mainApi.getMovies()
-      .then((data) => {
-        if (checked) {
-          setFilterMovies(data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(isInput.toLowerCase()))));
+    if (isInput) {
+      setIsLoading(true);
+      mainApi.getMovies()
+        .then((data) => {
+          let filtered = {};
+          if (checked) {
+            filtered = data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(isInput.toLowerCase())));
+          filtered.forEach(filterMovie => { 
+            savedMovies.forEach(savedMovie => {
+              if (filterMovie.id === savedMovie.movieId) {
+                filterMovie.isSaved = true;
+              }
+            })
+          })
         } else {
-          setFilterMovies(data.filter(movie => movie.nameRU.toLowerCase().includes(isInput.toLowerCase())));
+          filtered = data.filter(movie => movie.nameRU.toLowerCase().includes(isInput.toLowerCase()));
+          filtered.forEach(filterMovie => { 
+            savedMovies.forEach(savedMovie => {
+              if (filterMovie.id === savedMovie.movieId) {
+                filterMovie.isSaved = true;
+              }
+            })
+          })
         };
+        setFilterMovies(filtered);
       })
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false));
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
+    }
   }
 
   function handleMovieSearch(input) {
@@ -120,20 +137,23 @@ function App() {
       .then((data) => {
         let filtered = {};
         if (isFilterChecked) {
-          setFilterMovies(data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase()))));
+          filtered = data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase())));
+          filtered.forEach(filterMovie => { 
+            savedMovies.forEach(savedMovie => {
+              if (filterMovie.id === savedMovie.movieId) {
+                filterMovie.isSaved = true;
+              }
+            })
+          })
         } else {
           filtered = data.filter(movie => movie.nameRU.toLowerCase().includes(input.input.toLowerCase()));
           filtered.forEach(filterMovie => { 
             savedMovies.forEach(savedMovie => {
-              console.log('filterMovie.movieId: ', filterMovie.id);
-              console.log('savedMovie.movieId: ', savedMovie.movieId);
-              if (filterMovie.movieId === savedMovie.movieId) {
+              if (filterMovie.id === savedMovie.movieId) {
                 filterMovie.isSaved = true;
-                console.log('filterMovie.isSaved: ', filterMovie.isSaved);
               }
             })
           })
-          console.log(filtered);
         };
         setFilterMovies(filtered);
       })
@@ -172,7 +192,6 @@ function App() {
 
   function handleSaveMovie(movie) {
     if (movie.isSaved) {
-      console.log('unsaved');
       movie.isSaved = false;
       moviesApi.deleteMovie(movie._id)
         .then((newMovie) => {
@@ -206,6 +225,8 @@ function App() {
       .then((data) => {
         console.log(data.message);
         setLoggedIn(false);
+        setFilterMovies([]);
+        setIsInput('');
       })
       .catch((err) => console.log(err));
   }
