@@ -45,7 +45,7 @@ class MoviesApi {
           trailerLink: props.trailerLink,
           nameRU: props.nameRU,
           nameEN: props.nameEN,
-          thumbnail: props.thumbnail,
+          thumbnail: props.image.formats.thumbnail.url,
           movieId: props.id,
         }),
         credentials: "include",

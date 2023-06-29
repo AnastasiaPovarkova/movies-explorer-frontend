@@ -5,11 +5,7 @@ import loupe from "../../images/loupe.svg";
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
-  const {formValue, error, handleChange, resetValidation} = useForm();
-
-  // useEffect(() => {
-  //   resetValidation()
-  // }, );  //когда?
+  const {formValue, handleChange} = useForm();
 
   function handleSubmit(e) {
     e.preventDefault();

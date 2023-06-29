@@ -23,7 +23,7 @@ function Login(props) {
         <div className="login__inputs">
           <Link className="login__logo" to="/"><img className="login__logo" src={logo} alt="Movies Explorer" /></Link>
           <h2 className="login__title">Рады видеть!</h2>
-          <label for="email-field" className="login__lable">E-mail</label>
+          <label htmlFor="email-field" className="login__lable">E-mail</label>
           <input 
             type="email" 
             id="email-field" 
@@ -36,7 +36,7 @@ function Login(props) {
             onChange={handleChange}
           />
           <span className="name-field-error login__span">{error.email || ''}</span>
-          <label for="password-field" className="login__lable">Пароль</label>
+          <label htmlFor="password-field" className="login__lable">Пароль</label>
           <input
             type="text"
             id="password-field"

@@ -2,7 +2,7 @@ import './App.css';
 import React from "react";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -28,6 +28,7 @@ function App() {
   const [isFilterChecked, setIsFilterChecked] = useState(false);
   const [isInput, setIsInput] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
+  const currentUrl = useLocation.pathname;
 
   const navigate = useNavigate();
 
@@ -39,6 +40,8 @@ function App() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  console.log(savedMovies);
 
   useEffect(() => {
     handleTokenCheck();
@@ -117,20 +120,53 @@ function App() {
     setIsInput(input.input);
     mainApi.getMovies()
       .then((data) => {
+        let filtered = {};
         if (isFilterChecked) {
           setFilterMovies(data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase()))));
         } else {
-          setFilterMovies(data.filter(movie => movie.nameRU.toLowerCase().includes(input.input.toLowerCase())));
-        };
-        if (savedMovies) {
-          filterMovies.forEach(filterMovie => { 
+          filtered = data.filter(movie => movie.nameRU.toLowerCase().includes(input.input.toLowerCase()));
+          filtered.forEach(filterMovie => { 
             savedMovies.forEach(savedMovie => {
-              if (filterMovie.movieId === savedMovie.id) {
+              console.log('filterMovie.movieId: ', filterMovie.id);
+              console.log('savedMovie.movieId: ', savedMovie.movieId);
+              if (filterMovie.movieId === savedMovie.movieId) {
                 filterMovie.isSaved = true;
+                console.log('filterMovie.isSaved: ', filterMovie.isSaved);
               }
             })
           })
-        }
+          console.log(filtered);
+        };
+        setFilterMovies(filtered);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  }
+
+  function handleSavedFilterCheck(checked) {
+    setIsLoading(true);
+    moviesApi.getSavedMovies()
+      .then((data) => {
+        if (checked) {
+          setSavedMovies(data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(isInput.toLowerCase()))));
+        } else {
+          setSavedMovies(data.filter(movie => movie.nameRU.toLowerCase().includes(isInput.toLowerCase())));
+        };
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  }
+
+  function handleSavedMovieSearch(input) {
+    setIsLoading(true);
+    setIsInput(input.input);
+    moviesApi.getSavedMovies()
+      .then((data) => {
+        if (isFilterChecked) {
+          setSavedMovies(data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase()))));
+        } else {
+          setSavedMovies(data.filter(movie => movie.nameRU.toLowerCase().includes(input.input.toLowerCase())));
+        };
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
@@ -140,22 +176,35 @@ function App() {
     if (movie.isSaved) {
       console.log('unsaved');
       movie.isSaved = false;
-      moviesApi.deleteMovie(movie.id)
-        .then((data) => {
-          console.log(data)
+      moviesApi.deleteMovie(movie._id)
+        .then((newMovie) => {
+          setFilterMovies((state) => state.map((mov) => (mov.id === movie.movieId ? newMovie : mov)));
+          moviesApi.getSavedMovies()
+            .then((movies) => {
+              setSavedMovies(movies);
+            })
+            .catch((err) => console.log(err));
         })
         .catch((err) => console.log(err));
     } else {
       moviesApi.saveMovie(movie)
-        .then((data) => {
-          setSavedMovies(data);
-          // setFilterMovies()
-          console.log('moviesApi.saveMovie: ', data);
+        .then((newMovie) => {
+          newMovie.isSaved = true;
+          setSavedMovies([...savedMovies, newMovie]);
+          setFilterMovies((state) =>
+            state.map((mov) => (mov.id === newMovie.movieId ? newMovie : mov))
+          );
         })
         .catch((err) => console.log(err));
-      console.log('saved');
-      movie.isSaved = true;
     }
+  }
+
+  function handleDeleteMovie(movie) {
+    moviesApi.deleteMovie(movie._id)
+      .then(() => {
+        setSavedMovies((state) => state.filter((mov) => mov._id !== movie._id));
+      })
+      .catch((err) => console.log(err));
   }
 
 
@@ -180,7 +229,7 @@ function App() {
               <ProtectedRoute 
                 element={Movies}
                 isLoading = {isLoading}
-                foundMovies={filterMovies}
+                filterMovies={filterMovies}
                 onFilterCheckbox={handleFilterCheck}
                 onMovieSearch={handleMovieSearch} 
                 isChecked={isFilterChecked}
@@ -195,7 +244,12 @@ function App() {
             element={
               <ProtectedRoute 
                 element={SavedMovies}
-                foundMovies={savedMovies}
+                savedMovies={savedMovies}
+                onFilterCheckbox={handleSavedFilterCheck}
+                isChecked={isFilterChecked}
+                setIsChecked={setIsFilterChecked}
+                onMovieSearch={handleSavedMovieSearch}
+                onDeleteMovie={handleDeleteMovie}
                 loggedIn={loggedIn}
               />
             }

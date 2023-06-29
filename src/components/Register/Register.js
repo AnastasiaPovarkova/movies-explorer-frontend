@@ -23,7 +23,7 @@ function Register(props) {
         <div className="register__inputs">
           <Link className="register__logo" to="/"><img className="register__logo" src={logo} alt="Movies Explorer" /></Link>
           <h2 className="register__title">Добро пожаловать!</h2>
-          <label for="name-field" className="register__lable">Имя</label>
+          <label htmlFor="name-field" className="register__lable">Имя</label>
           <input
             type="text"
             id="name-field"
@@ -36,7 +36,7 @@ function Register(props) {
             onChange={handleChange}
           />
           <span className="name-field-error register__span">{error.name || ''}</span>
-          <label for="email-field" className="register__lable">E-mail</label>
+          <label htmlFor="email-field" className="register__lable">E-mail</label>
           <input 
             type="email" 
             id="email-field" 
@@ -49,7 +49,7 @@ function Register(props) {
             onChange={handleChange}
           />
           <span className="email-field-error register__span">{error.email || ''}</span>
-          <label for="password-field" className="register__lable">Пароль</label>
+          <label htmlFor="password-field" className="register__lable">Пароль</label>
           <input
             type="text"
             id="password-field"

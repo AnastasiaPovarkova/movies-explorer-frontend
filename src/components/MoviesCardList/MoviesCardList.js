@@ -10,9 +10,10 @@ function MoviesCardList(props) {
         props.movies?.map((movie) => {
           return (
             <MoviesCard
-              key={movie._id}
+              key={movie.id}
               movie={movie}
               onSaveMovie={props.onSaveMovie}
+              onDeleteMovie={props.onDeleteMovie}
             />
           );
         })}

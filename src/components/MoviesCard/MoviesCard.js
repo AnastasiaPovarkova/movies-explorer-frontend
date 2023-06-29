@@ -12,6 +12,11 @@ function MoviesCard(props) {
     props.onSaveMovie(props.movie);
   }
 
+  function handleDeleteMovie(e) {
+    e.preventDefault();
+    props.onDeleteMovie(props.movie);
+  }
+
   return (
     <section className="movie"> 
       <div className="movie__container"> 
@@ -29,6 +34,7 @@ function MoviesCard(props) {
           type="button" 
           aria-label="Сохранить" 
           className={`movie__button ${(location.pathname === "/saved-movies") ? "movie__close" : "movie__hidden"}`}
+          onClick={handleDeleteMovie}
         />
       </div> 
       <a href={props.movie.trailerLink} target="_blank" rel="noreferrer">
