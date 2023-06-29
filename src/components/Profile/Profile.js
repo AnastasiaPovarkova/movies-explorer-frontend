@@ -6,13 +6,19 @@ import './Profile.css';
 
 function Profile(props) {
   const currentUser = useContext(UserContext);
+
+  function handleLogout(e) {
+    e.preventDefault();
+    props.onLogout();
+  }
+
   return (
     <section className="profile">
       <form name="profile__form" className="profile__form">
         <div className="profile__inputs">
           <h2 className="profile__title">Привет, {currentUser.name}!</h2>
           <div className="profile__input"> 
-            <label for="name-field" className="profile__lable">Имя</label>
+            <label htmlFor="name-field" className="profile__lable">Имя</label>
             <input
               type="text"
               id="name-field"
@@ -28,7 +34,7 @@ function Profile(props) {
             <span className="name-field-error profile__span"></span>
           </div>
           <div className="profile__input">
-            <label for="email-field" className="profile__lable">E-mail</label>
+            <label htmlFor="email-field" className="profile__lable">E-mail</label>
             <input 
               type="email" 
               id="email-field" 
@@ -48,7 +54,17 @@ function Profile(props) {
       </form>
       <div className="profile__bottom">
         <Link className="profile__link">Редактировать</Link>
-        <Link to="/signup" className="profile__link profile__link-red">Выйти из аккаунта</Link>
+        <button 
+          className="profile__link profile__link-red"
+          onClick={handleLogout}
+          >
+            Выйти из аккаунта
+          </button>
+        {/* <Link 
+          to="/signup" 
+          className="profile__link profile__link-red"
+          onClick={handleLogout}
+        >Выйти из аккаунта</Link> */}
       </div>
     </section>
   );

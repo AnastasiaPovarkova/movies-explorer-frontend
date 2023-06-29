@@ -41,8 +41,6 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(savedMovies);
-
   useEffect(() => {
     handleTokenCheck();
   }, []);
@@ -179,11 +177,7 @@ function App() {
       moviesApi.deleteMovie(movie._id)
         .then((newMovie) => {
           setFilterMovies((state) => state.map((mov) => (mov.id === movie.movieId ? newMovie : mov)));
-          moviesApi.getSavedMovies()
-            .then((movies) => {
-              setSavedMovies(movies);
-            })
-            .catch((err) => console.log(err));
+          setSavedMovies(savedMovies.filter((movie) => movie.movieId !== newMovie.myMovie.movieId))
         })
         .catch((err) => console.log(err));
     } else {
@@ -203,6 +197,15 @@ function App() {
     moviesApi.deleteMovie(movie._id)
       .then(() => {
         setSavedMovies((state) => state.filter((mov) => mov._id !== movie._id));
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function handleLogout() {
+    auth.logout()
+      .then((data) => {
+        console.log(data.message);
+        setLoggedIn(false);
       })
       .catch((err) => console.log(err));
   }
@@ -259,6 +262,7 @@ function App() {
             element={
               <ProtectedRoute 
                 element={Profile}
+                onLogout={handleLogout}
                 loggedIn={loggedIn}
               />
             }

@@ -43,6 +43,14 @@ class Auth {
     });
   };
 
+  logout = () => {
+    return this._request(`${this._baseUrl}/logout`, {
+      method: "GET",
+      headers: this._headers,
+      credentials: "include",
+    });
+  }
+
 }
   
 const auth = new Auth({

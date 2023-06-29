@@ -97,6 +97,10 @@
 }
 
 .profile__link {
+  padding: 0;
+  border: none;
+  color: inherit;
+  background-color: transparent;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
