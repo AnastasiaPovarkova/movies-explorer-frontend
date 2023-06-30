@@ -86,10 +86,13 @@
   line-height: 17px;
   text-align: center;
   color: #FFFFFF;
-  display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile__bottom {
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -109,6 +112,10 @@
   text-align: center;
   color: #000000;
   text-decoration: none;
+}
+
+.profile__hidden {
+  display: none;
 }
 
 .profile__link-red {

@@ -69,6 +69,14 @@
   color: #FF3055;
 }
 
+.login__error {
+  margin: 8px 0 8px;
+  height: 16px;
+  font-weight: 400;
+  font-size: 14px;
+  color: #FF3055;
+}
+
 .login__submit {
   padding: 0;
   width: 396px;

@@ -60,6 +60,18 @@ class MoviesApi {
     });
   };
 
+  editProfile = (props) => {
+    return this._request(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: props.name,
+        email: props.email,
+      }),
+      credentials: "include",
+    });
+  }
+
 }
   
 const moviesApi = new MoviesApi({

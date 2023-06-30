@@ -17,5 +17,9 @@ export default function useForm() {
     setError(error);
   }
 
-  return {formValue, error, handleChange, resetValidation, isValid};
+  function setData(nameValue, emailValue) {
+    setFormValue({name: nameValue, email: emailValue });
+  }
+
+  return {formValue, error, handleChange, resetValidation, isValid, setData};
 }

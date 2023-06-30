@@ -50,6 +50,7 @@ function Login(props) {
           />
           <span className="profession-field-error login__span">{error.password || ''}</span>
         </div>
+        <h2 className="login__error">{props.errorMessage}</h2>
         <button 
           type="submit" 
           className={`login__submit ${(isValid) ? '' : 'login__submit-disabled'}`}

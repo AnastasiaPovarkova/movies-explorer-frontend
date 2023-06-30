@@ -2,7 +2,7 @@ import './App.css';
 import React from "react";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -28,7 +28,8 @@ function App() {
   const [isFilterChecked, setIsFilterChecked] = useState(false);
   const [isInput, setIsInput] = useState('');
   const [savedMovies, setSavedMovies] = useState([]);
-  const currentUrl = useLocation.pathname;
+  const [isEditing, setIsEditing] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -67,6 +68,7 @@ function App() {
         }
       })
       .catch((err) => {
+        setErrorMessage(err.message);
         console.log(err);
       })
       .finally(() => setIsAuthLoading(false));
@@ -83,6 +85,7 @@ function App() {
         }
       })
       .catch((err) => {
+        setErrorMessage(err.message);
         console.log(err);
       })
       .finally(() => setIsAuthLoading(false));
@@ -220,6 +223,15 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  function onEditProfileSubmit(formValue) {
+    moviesApi.editProfile(formValue)
+      .then((data) => {
+        console.log('Данные обновлены');
+        setCurrentUser(data.user);
+      })
+      .catch((err) => console.log(err));
+  }
+
   function handleLogout() {
     auth.logout()
       .then((data) => {
@@ -284,6 +296,9 @@ function App() {
               <ProtectedRoute 
                 element={Profile}
                 onLogout={handleLogout}
+                isEditing={isEditing}
+                setIsEditing={setIsEditing}
+                onEditProfileSubmit={onEditProfileSubmit}
                 loggedIn={loggedIn}
               />
             }
