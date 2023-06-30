@@ -53,6 +53,10 @@
   text-decoration: none;
 }
 
+.footer__hidden {
+  display: none;
+}
+
 @media screen and (max-width: 580px) {
   .footer {
     min-height: 253px;

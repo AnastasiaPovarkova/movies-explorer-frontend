@@ -19,7 +19,6 @@ function Profile(props) {
 
   function handleEditProfileSubmit(e) {
     e.preventDefault();
-    props.setIsEditing(false);
     props.onEditProfileSubmit(formValue);
   }
 
@@ -68,6 +67,7 @@ function Profile(props) {
             <span className="email-field-error profile__span">{error.email}</span>
           </div>
         </div>
+        <h2 className="profile__error">{props.errorMessageProfile}</h2>
         <button 
           type="submit" 
           className={`profile__submit ${(props.isEditing) ? '' : 'profile__hidden'}`}
@@ -82,14 +82,13 @@ function Profile(props) {
             type="button"
             className='profile__link'
             onClick={handleEditClick}
-          >
-              Редактировать
+          >Редактировать
           </button>
           <button 
+            type="button"
             className="profile__link profile__link-red"
             onClick={handleLogout}
-          >
-              Выйти из аккаунта
+          >Выйти из аккаунта
           </button>
         </div>
       </form>

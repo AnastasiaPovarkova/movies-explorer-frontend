@@ -30,6 +30,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessageProfile, setErrorMessageProfile] = useState('');
 
   const navigate = useNavigate();
 
@@ -69,7 +70,6 @@ function App() {
       })
       .catch((err) => {
         setErrorMessage(err.message);
-        console.log(err);
       })
       .finally(() => setIsAuthLoading(false));
   }
@@ -85,8 +85,11 @@ function App() {
         }
       })
       .catch((err) => {
-        setErrorMessage(err.message);
-        console.log(err);
+        if (err.statusCode === 400) {
+          setErrorMessage(err.validation.body.message);
+        } else {
+          setErrorMessage(err.message);
+        }
       })
       .finally(() => setIsAuthLoading(false));
   }
@@ -228,8 +231,12 @@ function App() {
       .then((data) => {
         console.log('Данные обновлены');
         setCurrentUser(data.user);
+        setErrorMessageProfile('');
+        setIsEditing(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setErrorMessageProfile(err.message);
+      });
   }
 
   function handleLogout() {
@@ -239,6 +246,7 @@ function App() {
         setLoggedIn(false);
         setFilterMovies([]);
         setIsInput('');
+        setErrorMessage('');
       })
       .catch((err) => console.log(err));
   }
@@ -299,6 +307,7 @@ function App() {
                 isEditing={isEditing}
                 setIsEditing={setIsEditing}
                 onEditProfileSubmit={onEditProfileSubmit}
+                errorMessageProfile={errorMessageProfile}
                 loggedIn={loggedIn}
               />
             }
@@ -307,6 +316,8 @@ function App() {
             path="/signup"
             element={<Register 
               handleRegister={handleRegister}
+              errorMessage={errorMessage}
+              setErrorMessage={setErrorMessage}
               isAuthLoading={isAuthLoading}
             />}
           />
@@ -314,6 +325,8 @@ function App() {
             path="/signin"
             element={<Login 
               handleLogin={handleLogin} 
+              errorMessage={errorMessage}
+              setErrorMessage={setErrorMessage}
               isAuthLoading={isAuthLoading}
             />}
           />

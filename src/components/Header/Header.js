@@ -23,6 +23,7 @@ function Header({handleBurgerClick, isBurgerOpen, onClose, loggedIn}) {
         {["/", "/movies", "/saved-movies", "/profile"].map((path) => (
           <Route path={path} element={<Link to="/"><img className="header__logo" src={logo} alt="Movies Explorer" /></Link>} />
         ))}
+        <Route path="*" element={<p className="header__hidden">a</p>} />
       </Routes>
         <div className="header__nav">
           <Routes>
@@ -32,6 +33,7 @@ function Header({handleBurgerClick, isBurgerOpen, onClose, loggedIn}) {
                 <Link to="/saved-movies" className={`header__navlink ${(location.pathname === "/saved-movies") ? "header__navlink-500" : ""}`}>Сохранённые фильмы</Link>
               </>} />
             ))}
+            <Route path="*" element={<p className="header__hidden">a</p>} />
           </Routes>
         </div>
       </div>
@@ -52,6 +54,7 @@ function Header({handleBurgerClick, isBurgerOpen, onClose, loggedIn}) {
             ></button>
             </>} />
           ))}
+          <Route path="*" element={<p className="header__hidden">a</p>} />
         </Routes>
         <div className={`header__back ${isBurgerOpen ? "header__burger-opened" : ""}`}></div> 
         <div className={`header__container ${isBurgerOpen ? "header__burger-opened" : ""}`}>

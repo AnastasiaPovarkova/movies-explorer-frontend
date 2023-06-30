@@ -5,12 +5,16 @@ import useForm from "../../hooks/useForm";
 import './Register.css';
 
 function Register(props) {
-  const {formValue, error, handleChange, resetValidation, isValid} = useForm();
+  const {formValue, error, resetValidation, handleChange, isValid} = useForm();
 
   function handleSubmit(e) {
     e.preventDefault();
     props.handleRegister(formValue);
+  }
+
+  function handleResetAll() {
     resetValidation();
+    props.setErrorMessage('');
   }
 
   return (
@@ -21,7 +25,13 @@ function Register(props) {
         onSubmit={handleSubmit}
       >
         <div className="register__inputs">
-          <Link className="register__logo" to="/"><img className="register__logo" src={logo} alt="Movies Explorer" /></Link>
+          <Link 
+            className="register__logo" 
+            to="/"
+            onClick={handleResetAll}
+          >
+              <img className="register__logo" src={logo} alt="Movies Explorer"/>
+          </Link>
           <h2 className="register__title">Добро пожаловать!</h2>
           <label htmlFor="name-field" className="register__lable">Имя</label>
           <input
@@ -63,6 +73,7 @@ function Register(props) {
           />
           <span className="password-field-error register__span">{error.password || ''}</span>
         </div>
+        <h2 className="register__error">{props.errorMessage}</h2>
         <button 
           type="submit" 
           className={`register__submit ${(isValid) ? '' : 'register__submit-disabled'}`}
@@ -74,7 +85,7 @@ function Register(props) {
       </form>
       <div className="register__bottom">
         <h2 className="register__text">Уже зарегистрированы?</h2>
-        <Link to="/signin" className="register__text register__link">Войти</Link>
+        <Link to="/signin" className="register__text register__link" onClick={handleResetAll}>Войти</Link>
       </div>
     </section>
   );

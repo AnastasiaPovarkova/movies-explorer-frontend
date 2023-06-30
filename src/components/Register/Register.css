@@ -113,6 +113,14 @@
   text-decoration: none;
 }
 
+.register__error {
+  margin: auto 0 20px;
+  height: 16px;
+  font-weight: 400;
+  font-size: 12px;
+  color: #FF3055;
+}
+
 @media screen and (max-width: 850px) {
   .register__form {
     width: 390px;

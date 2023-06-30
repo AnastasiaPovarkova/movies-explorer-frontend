@@ -10,7 +10,11 @@ function Login(props) {
   function handleSubmit(e) {
     e.preventDefault();
     props.handleLogin(formValue);
+  }
+
+  function handleResetAll() {
     resetValidation();
+    props.setErrorMessage('');
   }
 
   return (
@@ -21,7 +25,13 @@ function Login(props) {
         onSubmit={handleSubmit}
       >
         <div className="login__inputs">
-          <Link className="login__logo" to="/"><img className="login__logo" src={logo} alt="Movies Explorer" /></Link>
+          <Link 
+            className="login__logo" 
+            to="/"
+            onClick={handleResetAll}
+          >
+            <img className="login__logo" src={logo} alt="Movies Explorer"/>
+          </Link>
           <h2 className="login__title">Рады видеть!</h2>
           <label htmlFor="email-field" className="login__lable">E-mail</label>
           <input 
@@ -62,7 +72,7 @@ function Login(props) {
       </form>
       <div className="login__bottom">
         <h2 className="login__text">Ещё не зарегистрированы?</h2>
-        <Link to="/signup" className="login__text login__link">Регистрация</Link>
+        <Link to="/signup" className="login__text login__link" onClick={handleResetAll}>Регистрация</Link>
       </div>
     </section>
   );
