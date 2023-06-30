@@ -27,30 +27,39 @@ function Header({handleBurgerClick, isBurgerOpen, onClose, loggedIn}) {
       </Routes>
         <div className="header__nav">
           <Routes>
-            {["/movies", "/saved-movies", "/profile"].map((path) => (
+            {["/", "/movies", "/saved-movies", "/profile"].map((path) => (
               <Route path={path} element={<> 
-                <Link to="/movies" className={`header__navlink ${(location.pathname === "/movies") ? "header__navlink-500" : ""}`}>Фильмы</Link>
-                <Link to="/saved-movies" className={`header__navlink ${(location.pathname === "/saved-movies") ? "header__navlink-500" : ""}`}>Сохранённые фильмы</Link>
+                <Link 
+                  to="/movies" 
+                  className={`header__navlink 
+                    ${(location.pathname === "/movies") ? "header__navlink-500" : ""}
+                    ${(loggedIn) ? '' : 'profile__hidden'}`}>Фильмы</Link>
+                <Link 
+                  to="/saved-movies" 
+                  className={`header__navlink 
+                    ${(location.pathname === "/saved-movies") ? "header__navlink-500" : ""}
+                    ${(loggedIn) ? '' : 'profile__hidden'}`}>Сохранённые фильмы</Link>
               </>} />
             ))}
             <Route path="*" element={<p className="header__hidden">a</p>} />
           </Routes>
         </div>
       </div>
+
       <div className="header__right">
         <Routes>
-          <Route path="/" element={<> 
-            <Link to="/signup" className="header__link">Регистрация</Link>
-            <Link to="/signin" className="header__link header__link-entry">Войти</Link>
-          </>} />
-          {["/movies", "/saved-movies", "/profile"].map((path) => (
-              <Route path={path} element={<>
-                <Link to="/profile" className="header__link header__link-account">Аккаунт</Link>
-                <button
-                  type="button"
-                  aria-label="Нравится"
-                  className={`header__burger ${isBurgerOpen ? "header__burger-close" : ""}`}
-                  onClick={handleBurgerClick}
+          {["/", "/movies", "/saved-movies", "/profile"].map((path) => (
+            <Route path={path} element={<>
+              <Link to="/signup" className={`header__link ${(loggedIn) ? 'profile__hidden' : ''}`}>Регистрация</Link>
+              <Link to="/signin" className={`header__link header__link-entry ${(loggedIn) ? 'profile__hidden' : ''}`}>Войти</Link>
+              <Link 
+                to="/profile" 
+                className={`header__link header__link-account ${(loggedIn) ? '' : 'profile__hidden'}`}>Аккаунт</Link>
+              <button
+                type="button"
+                aria-label="Нравится"
+                className={`header__burger ${isBurgerOpen ? "header__burger-close" : ""} ${(loggedIn) ? '' : 'profile__hidden'}`}
+                onClick={handleBurgerClick}
             ></button>
             </>} />
           ))}
@@ -64,6 +73,7 @@ function Header({handleBurgerClick, isBurgerOpen, onClose, loggedIn}) {
           <Link to="/profile" className="header__burgerlink header__burgerlink-acc" onClick={onClose}>Аккаунт</Link>
         </div>
       </div>
+      
     </header>
   );
 }

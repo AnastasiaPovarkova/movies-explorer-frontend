@@ -9,7 +9,7 @@
 .profile__form {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   width: 410px;
   height: 417px;
@@ -82,7 +82,6 @@
 }
 
 .profile__submit {
-  margin-top: auto;
   width: 396px;
   height: 45px;
   cursor: pointer;
