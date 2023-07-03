@@ -5,7 +5,7 @@ import './Profile.css';
 
 function Profile(props) {
   const currentUser = useContext(UserContext);
-  const {formValue, error, handleChange, isValid, setData} = useForm();
+  const {formValue, error, handleChange, setData} = useForm();
 
   function handleLogout(e) {
     e.preventDefault();
