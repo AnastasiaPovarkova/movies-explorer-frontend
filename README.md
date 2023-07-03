@@ -2,6 +2,8 @@
 
 Фронтенд для дипломной работы Movies-Explorer. Написан на React. 
 Ссылка на макет диплома: https://disk.yandex.ru/d/vjfJmEqWAue7Ug
+Ссылка на сайт: https://front.diploma.anstpov.nomoreparties.sbs
+Ссылка на пулл-реквест: https://github.com/AnastasiaPovarkova/movies-explorer-frontend/pull/2
 
 ## Available Scripts
 
