@@ -6,8 +6,8 @@ import Preloader from '../Preloader/Preloader'
 function MoviesCardList(props) {
   return (
     <section className="movies"> 
-      {props.isLoading && <Preloader /> ||
-       props.nothingFound && <h2 className="movies__notfound">{props.nothingFound}</h2> ||
+      {(props.isLoading && <Preloader />) ||
+       (props.nothingFound && <h2 className="movies__notfound">{props.nothingFound}</h2>) ||
         props.movies?.map((movie) => {
           return (
             <MoviesCard
