@@ -46,7 +46,7 @@ function App() {
         setSavedMovies(movies);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [loggedIn]);
 
   useEffect(() => {
     function handleWindowResize() {
@@ -103,7 +103,7 @@ function App() {
       .register(formValue.email, formValue.password, formValue.name)
       .then((res) => {
         if (res) {
-          navigate("/signin", { replace: true });
+          handleLogin(formValue);
         }
       })
       .catch((err) => {
