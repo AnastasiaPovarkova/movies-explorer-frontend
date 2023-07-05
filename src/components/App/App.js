@@ -67,7 +67,9 @@ function App() {
 
   useEffect(() => {
     setMoviesAmounts();
-    setMoviesForRender(JSON.parse(localStorage.renderedMovies));
+    if (localStorage.renderedMovies) {
+      setMoviesForRender(JSON.parse(localStorage.renderedMovies));
+    }
   }, [windowSize]);
 
   const setMoviesAmounts = () => {
