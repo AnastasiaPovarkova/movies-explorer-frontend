@@ -27,13 +27,11 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isFilterChecked, setIsFilterChecked] = useState(false);
   const [isFilterCheckedInSaved, setIsFilterCheckedInSaved] = useState(false);
-  const [isInput, setIsInput] = useState('');
   const [isInputInSaved, setIsInputInSaved] = useState('');
   const [savedMovies, setSavedMovies] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [errorMessageProfile, setErrorMessageProfile] = useState('');
-  const [nothingFound, setNothingFound] = useState('');
   const [nothingFoundInSaved, setNothingFoundInSaved] = useState('');
   const [isFuther, setIsFuther] = useState(false);
   const [firstMoviesAmount, setFirstMoviesAmount] = useState(0);
@@ -94,7 +92,6 @@ function App() {
       .then((res) => {
         if (res) {
           setLoggedIn(true);
-          // navigate("/movies", { replace: true });
         }
       })
       .catch((err) => console.log(err));
@@ -155,12 +152,16 @@ function App() {
   }
 
   function handleRenderMovies(filteredArr) {
+    console.log('filteredArr.length: ', filteredArr.length);
     if (filteredArr.length === 0) {
-      setNothingFound('Ничего не найдено');
+      localStorage.setItem('nothingFound', 'Ничего не найдено');
+      localStorage.setItem('renderedMovies', '');
     } else {
       setFilterMovies(filteredArr);
-      setMoviesForRender(filteredArr.slice(0, firstMoviesAmount) || filteredArr);
-      setNothingFound('');
+      let moviesForRender = filteredArr.slice(0, firstMoviesAmount) || filteredArr;
+      setMoviesForRender(moviesForRender);
+      localStorage.setItem('renderedMovies', JSON.stringify(moviesForRender));
+      localStorage.setItem('nothingFound', '');
     }
     if (filteredArr.length <= firstMoviesAmount) {
       setIsFuther(false);
@@ -168,17 +169,16 @@ function App() {
   }
 
   function handleFilterCheck(checked) {
-    if (isInput) {
+    if (localStorage.input) {
       setIsLoading(true);
       mainApi.getMovies()
         .then((data) => {
           let filtered = {};
           if (checked) {
-            setNothingFound('');
-            filtered = data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(isInput.toLowerCase())));
+            filtered = data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(localStorage.input.toLowerCase())));
             handleCompareMovies(filtered);
           } else {
-            filtered = data.filter(movie => movie.nameRU.toLowerCase().includes(isInput.toLowerCase()));
+            filtered = data.filter(movie => movie.nameRU.toLowerCase().includes(localStorage.input.toLowerCase()));
             handleCompareMovies(filtered);
           };
           handleRenderMovies(filtered);
@@ -190,7 +190,7 @@ function App() {
 
   function handleMovieSearch(input) {
     setIsLoading(true);
-    setIsInput(input.input);
+    localStorage.setItem('input', input.input)
     mainApi.getMovies()
       .then((data) => {
         let filtered = {};
@@ -207,7 +207,7 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
-  function handleMovieRender() {
+  function handleFutherMovieRender() {
     setMoviesForRender(filterMovies.slice(0, moviesForRender.length + addMoviesAmount) || filterMovies);
     if (filterMovies.length <= moviesForRender.length + addMoviesAmount) {
       setIsFuther(false);
@@ -241,7 +241,7 @@ function App() {
     let filtered = [];
     moviesApi.getSavedMovies()
       .then((data) => {
-        if (isFilterChecked) {
+        if (isFilterCheckedInSaved) {
           filtered = (data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase()))));
         } else {
           filtered = (data.filter(movie => movie.nameRU.toLowerCase().includes(input.input.toLowerCase())));
@@ -305,9 +305,9 @@ function App() {
     auth.logout()
       .then((data) => {
         console.log(data.message);
+        localStorage.clear();
         setLoggedIn(false);
         setFilterMovies([]);
-        setIsInput('');
         setErrorMessage('');
       })
       .catch((err) => console.log(err));
@@ -341,8 +341,7 @@ function App() {
                 isChecked={isFilterChecked}
                 setIsChecked={setIsFilterChecked}
                 onSaveMovie={handleSaveMovie}
-                nothingFound={nothingFound}
-                onFuther={handleMovieRender}
+                onFuther={handleFutherMovieRender}
                 isFuther={isFuther}
                 loggedIn={loggedIn}
               />

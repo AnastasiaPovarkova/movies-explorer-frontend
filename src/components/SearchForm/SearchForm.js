@@ -1,20 +1,28 @@
-// import { useEffect } from "react";
+import { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 import useForm from "../../hooks/useForm";
 import loupe from "../../images/loupe.svg";
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
-  const {formValue, handleChange} = useForm();
+  const {formValue, handleChange, setInput} = useForm();
+  let location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/movies") {
+      setInput(localStorage.input);
+    } else {
+      setInput('');
+    }
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
-
     props.onMovieSearch({
       input: formValue.movie,
     });
   }
-
   return (
     <>
       <form 
@@ -26,7 +34,7 @@ function SearchForm(props) {
           <input 
             type="text" 
             name="movie" 
-            value={formValue.movie || ''}
+            value={formValue.movie}
             onChange={handleChange}
             minLength="1"
             placeholder="Фильм" 
@@ -36,7 +44,11 @@ function SearchForm(props) {
           <button type="submit" className="search__submit"></button>
         </div>
         <div className="search__shorts">
-          <FilterCheckbox isChecked={props.isChecked} setIsChecked={props.setIsChecked} onFilterCheckbox={props.onFilterCheckbox}/>
+          <FilterCheckbox 
+            isChecked={props.isFilterChecked} 
+            setIsChecked={props.setIsChecked}
+            onFilterCheckbox={props.onFilterCheckbox}
+          />
           <h2 className="search__text">Короткометражки</h2>
         </div>
       </form>

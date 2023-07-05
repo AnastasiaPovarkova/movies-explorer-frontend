@@ -21,5 +21,9 @@ export default function useForm() {
     setFormValue({name: nameValue, email: emailValue });
   }
 
-  return {formValue, error, handleChange, resetValidation, isValid, setData};
+  function setInput(input) {
+    setFormValue({movie: input});
+  }
+
+  return {formValue, error, handleChange, resetValidation, isValid, setData, setInput};
 }
