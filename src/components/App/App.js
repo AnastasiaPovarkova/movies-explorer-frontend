@@ -296,15 +296,19 @@ function App() {
   }
 
   function onEditProfileSubmit(formValue) {
+    setIsLoading(true);
     moviesApi.editProfile(formValue)
       .then((data) => {
-        console.log('Данные обновлены');
         setCurrentUser(data.user);
         setErrorMessageProfile('');
         setIsEditing(false);
       })
       .catch((err) => {
         setErrorMessageProfile(err.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        alert("Данные профиля обновлены");
       });
   }
 
@@ -378,6 +382,7 @@ function App() {
             element={
               <ProtectedRoute 
                 element={Profile}
+                isLoading = {isLoading}
                 onLogout={handleLogout}
                 isEditing={isEditing}
                 setIsEditing={setIsEditing}

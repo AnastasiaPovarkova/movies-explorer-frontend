@@ -75,7 +75,7 @@ function Profile(props) {
           defaultValue="Сохранить"
           disabled={props.isEditing ? false : true}
         >
-          Сохранить
+          {props.isLoading ? "Сохранение..." : "Сохранить"}
         </button>
         <div className={`profile__bottom ${(props.isEditing) ? 'profile__hidden' : ''}`}>
           <button 
