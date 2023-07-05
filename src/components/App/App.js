@@ -26,7 +26,9 @@ function App() {
   const [moviesForRender, setMoviesForRender] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFilterChecked, setIsFilterChecked] = useState(false);
+  const [isFilterCheckedInSaved, setIsFilterCheckedInSaved] = useState(false);
   const [isInput, setIsInput] = useState('');
+  const [isInputInSaved, setIsInputInSaved] = useState('');
   const [savedMovies, setSavedMovies] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -218,9 +220,9 @@ function App() {
     moviesApi.getSavedMovies()
       .then((data) => {
         if (checked) {
-          filtered = (data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(isInput.toLowerCase()))));
+          filtered = (data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(isInputInSaved.toLowerCase()))));
         } else {
-          filtered = (data.filter(movie => movie.nameRU.toLowerCase().includes(isInput.toLowerCase())));
+          filtered = (data.filter(movie => movie.nameRU.toLowerCase().includes(isInputInSaved.toLowerCase())));
         };
         if (filtered.length === 0) {
           setNothingFoundInSaved('Ничего не найдено');
@@ -235,7 +237,7 @@ function App() {
 
   function handleSavedMovieSearch(input) {
     setIsLoading(true);
-    setIsInput(input.input);
+    setIsInputInSaved(input.input);
     let filtered = [];
     moviesApi.getSavedMovies()
       .then((data) => {
@@ -354,8 +356,8 @@ function App() {
                 isLoading = {isLoading}
                 savedMovies={savedMovies}
                 onFilterCheckbox={handleSavedFilterCheck}
-                isChecked={isFilterChecked}
-                setIsChecked={setIsFilterChecked}
+                isChecked={isFilterCheckedInSaved}
+                setIsChecked={setIsFilterCheckedInSaved}
                 onMovieSearch={handleSavedMovieSearch}
                 onDeleteMovie={handleDeleteMovie}
                 nothingFound={nothingFoundInSaved}
