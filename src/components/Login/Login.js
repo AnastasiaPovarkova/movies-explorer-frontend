@@ -48,7 +48,7 @@ function Login(props) {
           <span className="name-field-error login__span">{error.email || ''}</span>
           <label htmlFor="password-field" className="login__lable">Пароль</label>
           <input
-            type="text"
+            type="password"
             id="password-field"
             className="login__field"
             minLength="8"

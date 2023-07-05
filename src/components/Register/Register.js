@@ -61,7 +61,7 @@ function Register(props) {
           <span className="email-field-error register__span">{error.email || ''}</span>
           <label htmlFor="password-field" className="register__lable">Пароль</label>
           <input
-            type="text"
+            type="password"
             id="password-field"
             className="register__field"
             minLength="8"
