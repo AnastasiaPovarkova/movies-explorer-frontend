@@ -92,7 +92,7 @@ function App() {
       .then((res) => {
         if (res) {
           setLoggedIn(true);
-          navigate("/movies", { replace: true });
+          // navigate("/movies", { replace: true });
         }
       })
       .catch((err) => console.log(err));
@@ -280,6 +280,8 @@ function App() {
     moviesApi.deleteMovie(movie._id)
       .then(() => {
         setSavedMovies((state) => state.filter((mov) => mov._id !== movie._id));
+        movie.isSaved = false;
+        setMoviesForRender((state) => state.map((mov) => mov.id === movie.movieId ? movie : mov))
       })
       .catch((err) => console.log(err));
   }
