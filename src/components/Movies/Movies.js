@@ -17,11 +17,11 @@ function Movies(props) {
         onFilterCheckbox={props.onFilterCheckbox}
       />
       {(props.isLoading && <Preloader />) || 
-      (location.pathname === "/movies" ? 
-        (localStorage.nothingFound && <h2 className="movies__notfound">{localStorage.nothingFound}</h2>) :
-        (props.nothingFound && <h2 className="movies__notfound">{props.nothingFound}</h2>)) ||
+      (location.pathname === "/movies" 
+        ? (localStorage.nothingFound && <h2 className="movies__notfound">{localStorage.nothingFound}</h2>) 
+        : (props.nothingFound && <h2 className="movies__notfound">{props.nothingFound}</h2>)) ||
         <MoviesCardList 
-          movies={location.pathname === "/movies" ? (localStorage.renderedMovies ? JSON.parse(localStorage.renderedMovies) : props.filterMovies) : props.filterMovies} 
+          movies={props.filterMovies} 
           onSaveMovie={props.onSaveMovie}
         /> 
       }

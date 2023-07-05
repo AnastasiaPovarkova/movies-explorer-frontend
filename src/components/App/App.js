@@ -67,6 +67,7 @@ function App() {
 
   useEffect(() => {
     setMoviesAmounts();
+    setMoviesForRender(JSON.parse(localStorage.renderedMovies));
   }, [windowSize]);
 
   const setMoviesAmounts = () => {
@@ -158,9 +159,9 @@ function App() {
       localStorage.setItem('renderedMovies', '');
     } else {
       setFilterMovies(filteredArr);
-      let moviesForRender = filteredArr.slice(0, firstMoviesAmount) || filteredArr;
-      setMoviesForRender(moviesForRender);
-      localStorage.setItem('renderedMovies', JSON.stringify(moviesForRender));
+      let renderedMovies = filteredArr.slice(0, firstMoviesAmount) || filteredArr;
+      setMoviesForRender(renderedMovies);
+      localStorage.setItem('renderedMovies', JSON.stringify(renderedMovies));
       localStorage.setItem('nothingFound', '');
     }
     if (filteredArr.length <= firstMoviesAmount) {
@@ -263,7 +264,9 @@ function App() {
       moviesApi.deleteMovie(movieForDelete?._id)
         .then((newMovie) => {
           movie.isSaved = false;
-          setMoviesForRender((state) => state.map((mov) => (mov.id === movie.id ? movie : mov)));
+          let renderedMovies = (moviesForRender.map((mov) => (mov.id === movie.id ? movie : mov)));
+          localStorage.setItem('renderedMovies', JSON.stringify(renderedMovies));
+          setMoviesForRender(renderedMovies);
           setSavedMovies(savedMovies.filter((mov) => mov.movieId !== newMovie.myMovie.movieId));
         })
         .catch((err) => console.log(err));
@@ -272,7 +275,9 @@ function App() {
         .then((newMovie) => {
           movie.isSaved = true;
           setSavedMovies([...savedMovies, newMovie]);
-          setMoviesForRender((state) => state.map((mov) => (mov.id === newMovie.movieId ? movie : mov)));
+          let renderedMovies = (moviesForRender.map((mov) => (mov.id === newMovie.movieId ? movie : mov)));
+          localStorage.setItem('renderedMovies', JSON.stringify(renderedMovies));
+          setMoviesForRender(renderedMovies);
         })
         .catch((err) => console.log(err));
     }
@@ -283,7 +288,9 @@ function App() {
       .then(() => {
         setSavedMovies((state) => state.filter((mov) => mov._id !== movie._id));
         movie.isSaved = false;
-        setMoviesForRender((state) => state.map((mov) => mov.id === movie.movieId ? movie : mov))
+        let renderedMovies = (moviesForRender.map((mov) => (mov.id === movie.movieId ? movie : mov)));
+        localStorage.setItem('renderedMovies', JSON.stringify(renderedMovies));
+        setMoviesForRender(renderedMovies);
       })
       .catch((err) => console.log(err));
   }
