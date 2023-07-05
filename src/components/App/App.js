@@ -304,7 +304,7 @@ function App() {
           onClose={closeBurgerMenu}
           loggedIn={loggedIn}
         />
-        <main className="app__main">
+        <main>
         <Routes>
           <Route
             path="/"
