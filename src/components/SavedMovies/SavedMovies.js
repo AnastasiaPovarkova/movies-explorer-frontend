@@ -1,5 +1,7 @@
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
+import Preloader from '../Preloader/Preloader'
+import '../Movies/Movies.css';
 
 function SavedMovies(props) {
   return (
@@ -10,11 +12,13 @@ function SavedMovies(props) {
         setIsChecked={props.setIsChecked}
         onMovieSearch={props.onMovieSearch}
       />
-      <MoviesCardList 
-        isLoading={props.isLoading} 
-        movies={props.savedMovies} 
-        onDeleteMovie={props.onDeleteMovie}
-      /> 
+      {(props.isLoading && <Preloader />) || 
+        (props.nothingFound && <h2 className="movies__notfound">{props.nothingFound}</h2>) ||
+        <MoviesCardList 
+          movies={props.savedMovies} 
+          onDeleteMovie={props.onDeleteMovie}
+        /> 
+      }
     </>
   );
 }

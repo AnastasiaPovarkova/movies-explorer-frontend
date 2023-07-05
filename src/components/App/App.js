@@ -32,6 +32,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [errorMessageProfile, setErrorMessageProfile] = useState('');
   const [nothingFound, setNothingFound] = useState('');
+  const [nothingFoundInSaved, setNothingFoundInSaved] = useState('');
   const [isFuther, setIsFuther] = useState(false);
   const [firstMoviesAmount, setFirstMoviesAmount] = useState(0);
   const [addMoviesAmount, setAddMoviesAmount] = useState(0);
@@ -213,13 +214,20 @@ function App() {
 
   function handleSavedFilterCheck(checked) {
     setIsLoading(true);
+    let filtered = [];
     moviesApi.getSavedMovies()
       .then((data) => {
         if (checked) {
-          setSavedMovies(data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(isInput.toLowerCase()))));
+          filtered = (data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(isInput.toLowerCase()))));
         } else {
-          setSavedMovies(data.filter(movie => movie.nameRU.toLowerCase().includes(isInput.toLowerCase())));
+          filtered = (data.filter(movie => movie.nameRU.toLowerCase().includes(isInput.toLowerCase())));
         };
+        if (filtered.length === 0) {
+          setNothingFoundInSaved('Ничего не найдено');
+        } else {
+          setNothingFoundInSaved('');
+          setSavedMovies(filtered);
+        }
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
@@ -228,13 +236,20 @@ function App() {
   function handleSavedMovieSearch(input) {
     setIsLoading(true);
     setIsInput(input.input);
+    let filtered = [];
     moviesApi.getSavedMovies()
       .then((data) => {
         if (isFilterChecked) {
-          setSavedMovies(data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase()))));
+          filtered = (data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase()))));
         } else {
-          setSavedMovies(data.filter(movie => movie.nameRU.toLowerCase().includes(input.input.toLowerCase())));
+          filtered = (data.filter(movie => movie.nameRU.toLowerCase().includes(input.input.toLowerCase())));
         };
+        if (filtered.length === 0) {
+          setNothingFoundInSaved('Ничего не найдено');
+        } else {
+          setNothingFoundInSaved('');
+          setSavedMovies(filtered);
+        }
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
@@ -334,12 +349,14 @@ function App() {
             element={
               <ProtectedRoute 
                 element={SavedMovies}
+                isLoading = {isLoading}
                 savedMovies={savedMovies}
                 onFilterCheckbox={handleSavedFilterCheck}
                 isChecked={isFilterChecked}
                 setIsChecked={setIsFilterChecked}
                 onMovieSearch={handleSavedMovieSearch}
                 onDeleteMovie={handleDeleteMovie}
+                nothingFound={nothingFoundInSaved}
                 loggedIn={loggedIn}
               />
             }
