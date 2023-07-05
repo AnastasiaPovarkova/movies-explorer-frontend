@@ -1,4 +1,5 @@
 import { useState } from "react";
+const isEmail = require('validator/lib/isEmail');
 
 export default function useForm() {
   const [formValue, setFormValue] = useState({});
@@ -8,7 +9,13 @@ export default function useForm() {
   function handleChange(e) {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
-    setError({ ...error, [name]: e.target.validationMessage });
+    if (name === "email") {
+      if (!isEmail(value)) {
+        setError({ ...error, [name]: "Укажите email в формате name@domain.zone"});
+      } else (setError({ ...error, [name]: e.target.validationMessage}))
+    } else {
+      setError({ ...error, [name]: e.target.validationMessage});
+    }
     setIsValid(e.target.closest('form').checkValidity());
   };
 

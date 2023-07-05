@@ -19,7 +19,7 @@ function Register(props) {
 
   return (
     <section className="register">
-      <form 
+      <form
         name="register__form" 
         className="register__form"
         onSubmit={handleSubmit}
