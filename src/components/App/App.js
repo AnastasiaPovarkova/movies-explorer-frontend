@@ -306,6 +306,8 @@ function App() {
       .then((data) => {
         console.log(data.message);
         localStorage.clear();
+        setMoviesForRender([]);
+        setSavedMovies([]);
         setLoggedIn(false);
         setFilterMovies([]);
         setErrorMessage('');
