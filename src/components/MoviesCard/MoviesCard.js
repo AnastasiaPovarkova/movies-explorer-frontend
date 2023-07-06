@@ -6,6 +6,8 @@ function MoviesCard(props) {
   let location = useLocation();
 
   let ButtonSaveClass = `${(props.movie.isSaved) ? "movie__saved" : "movie__save"}`;
+  let hours = Math.floor(props.movie.duration/60);
+  let min = props.movie.duration-(hours*60);
 
   function handleSaveMovie(e) {
     e.preventDefault();
@@ -22,7 +24,7 @@ function MoviesCard(props) {
       <div className="movie__container">
         <div className="movie__info">
           <h2 className="movie__name">{props.movie.nameRU}</h2>
-          <h2 className="movie__duration">{props.movie.duration} мин</h2>
+          <h2 className="movie__duration">{hours ? `${hours}ч` : ''} {min ? `${min}м` : ''}</h2>
         </div>
         <button  
           type="button" 
