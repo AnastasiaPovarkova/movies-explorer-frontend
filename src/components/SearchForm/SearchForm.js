@@ -45,7 +45,7 @@ function SearchForm(props) {
         </div>
         <div className="search__shorts">
           <FilterCheckbox 
-            isChecked={props.isFilterChecked} 
+            isChecked={props.isChecked} 
             setIsChecked={props.setIsChecked}
             onFilterCheckbox={props.onFilterCheckbox}
           />

@@ -52,14 +52,21 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    if (location.pathname === '/saved-movies') {
+    if (!(location.pathname === '/saved-movies')) {
       moviesApi.getSavedMovies()
       .then((movies) => {
+        setNothingFoundInSaved('');
+        setIsFilterCheckedInSaved(false);
         setSavedMovies(movies);
       })
       .catch((err) => console.log(err));
+    } 
+    if (location.pathname === '/movies') {
+      if (localStorage.isFilterChecked === 'true') {
+        setIsFilterChecked(true);
+      } else setIsFilterChecked(false)
     }
-  }, [location.pathname]);
+  }, [location]);
 
   useEffect(() => {
     function handleWindowResize() {
@@ -184,6 +191,9 @@ function App() {
   }
 
   function handleFilterCheck(checked) {
+    if (checked) {
+      localStorage.setItem('isFilterChecked', true);
+    } else localStorage.setItem('isFilterChecked', false);
     if (localStorage.input) {
       setIsLoading(true);
       mainApi.getMovies()
@@ -209,7 +219,7 @@ function App() {
     mainApi.getMovies()
       .then((data) => {
         let filtered = {};
-        if (isFilterChecked) {
+        if (localStorage.isFilterChecked === 'true') {
           filtered = data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase())));
           handleCompareMovies(filtered);
         } else {
@@ -336,6 +346,8 @@ function App() {
         setLoggedIn(false);
         setFilterMovies([]);
         setErrorMessage('');
+        setIsFilterChecked(false);
+        setIsFilterCheckedInSaved(false);
       })
       .catch((err) => console.log(err));
   }
