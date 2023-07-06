@@ -14,10 +14,9 @@ function Header({handleBurgerClick, isBurgerOpen, onClose, loggedIn}) {
     };
   }, [isBurgerOpen]);
 
- 
-
   return (
-    <header className={`${(location.pathname === "/signup" || location.pathname === "/signin" || location.pathname === "*") ? "header-hidden" : "header"}`}>
+    <header className={`${(location.pathname === "/" || location.pathname === "/movies" 
+    || location.pathname === "/saved-movies" || location.pathname === "/profile") ? "header" : "header__hidden"}`}>
       <div className="header__left">
       <Routes>
         {["/", "/movies", "/saved-movies", "/profile"].map((path) => (

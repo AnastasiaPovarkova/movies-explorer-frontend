@@ -17,6 +17,7 @@ import auth from "../../utils/Auth";
 import ProtectedRoute from "../../utils/ProtectedRoute";
 import { UserContext } from "../../contexts/CurrentUserContext";
 import { useLocation } from 'react-router-dom';
+import Preloader from '../Preloader/Preloader'
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -26,6 +27,7 @@ function App() {
   const [filterMovies, setFilterMovies] = useState([]);
   const [moviesForRender, setMoviesForRender] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isPreloaderLoading, setIsPreloaderLoading] = useState(false);
   const [isFilterChecked, setIsFilterChecked] = useState(false);
   const [isFilterCheckedInSaved, setIsFilterCheckedInSaved] = useState(false);
   const [isInputInSaved, setIsInputInSaved] = useState('');
@@ -43,12 +45,14 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setIsPreloaderLoading(true);
     Promise.all([moviesApi.getUserInfo(), moviesApi.getSavedMovies()])
       .then(([data, movies]) => {
         setCurrentUser(data.user);
         setSavedMovies(movies);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setIsPreloaderLoading(false));
   }, [loggedIn]);
 
   useEffect(() => {
@@ -105,6 +109,7 @@ function App() {
   }
 
   useEffect(() => {
+    setIsPreloaderLoading(true);
     handleTokenCheck();
   }, []);
 
@@ -116,7 +121,8 @@ function App() {
           setLoggedIn(true);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setIsPreloaderLoading(false));
   };
 
   function handleRegister(formValue) {
@@ -141,6 +147,7 @@ function App() {
       .then((data) => {
         if (data) {
           setLoggedIn(true);
+          localStorage.setItem('loggedIn', true)
           navigate("/movies", { replace: true });
         }
       })
@@ -354,6 +361,7 @@ function App() {
 
 
   return (
+    isPreloaderLoading ? <Preloader /> : (
     <UserContext.Provider value={currentUser}>
       <div className="app">
         <Header 
@@ -441,7 +449,7 @@ function App() {
         </main>
         <Footer />
       </div>
-    </UserContext.Provider>
+    </UserContext.Provider>)
   );
 }
 

@@ -9,12 +9,6 @@
   position: relative;
 }
 
-.header-hidden {
-  margin: 0;
-  padding: 0;
-  display: none;
-}
-
 .header__left {
   display: flex;
   flex-direction: row;
@@ -171,6 +165,12 @@
 
 .header__burgerlink-here {
   border-bottom: 2px solid #000000;
+}
+
+.header__hidden {
+  margin: 0;
+  padding: 0;
+  display: none;
 }
 
 @media screen and (max-width: 880px) {
