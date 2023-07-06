@@ -56,7 +56,8 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    if (!(location.pathname === '/saved-movies')) {
+    setIsPreloaderLoading(true);
+    if ((location.pathname === '/saved-movies')) {
       moviesApi.getSavedMovies()
       .then((movies) => {
         setNothingFoundInSaved('');
@@ -64,12 +65,15 @@ function App() {
         setSavedMovies(movies);
       })
       .catch((err) => console.log(err));
-    } 
-    if (location.pathname === '/movies') {
+    } else if (location.pathname === '/movies') {
       if (localStorage.isFilterChecked === 'true') {
         setIsFilterChecked(true);
       } else setIsFilterChecked(false)
+    } else if (location.pathname === '/profile') {
+      setIsEditing(false);
+      setErrorMessageProfile('');
     }
+    setIsPreloaderLoading(false);
   }, [location]);
 
   useEffect(() => {
@@ -147,7 +151,6 @@ function App() {
       .then((data) => {
         if (data) {
           setLoggedIn(true);
-          localStorage.setItem('loggedIn', true)
           navigate("/movies", { replace: true });
         }
       })
@@ -333,13 +336,13 @@ function App() {
         setCurrentUser(data.user);
         setErrorMessageProfile('');
         setIsEditing(false);
+        alert("Данные профиля обновлены");
       })
       .catch((err) => {
         setErrorMessageProfile(err.message);
       })
       .finally(() => {
         setIsLoading(false);
-        alert("Данные профиля обновлены");
       });
   }
 
