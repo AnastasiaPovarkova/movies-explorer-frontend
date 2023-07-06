@@ -176,6 +176,14 @@ function App() {
     } else setIsBurgerMenuOpen(true);
   }
 
+  function handleFilterMovies(checkbox, data, inputData) {
+    if (checkbox) {
+      return data.filter(movie => (movie.duration < SHORT_MOVIE_DUR) && (movie.nameRU.toLowerCase().includes(inputData.toLowerCase())));
+    } else {
+      return data.filter(movie => movie.nameRU.toLowerCase().includes(inputData.toLowerCase()));
+    };
+  }
+
   function handleCompareMovies(filteredArr) {
     filteredArr.forEach(filterMovie => { 
       savedMovies.forEach(savedMovie => {
@@ -209,14 +217,8 @@ function App() {
       setIsLoading(true);
       mainApi.getMovies()
         .then((data) => {
-          let filtered = {};
-          if (checked) {
-            filtered = data.filter(movie => (movie.duration < SHORT_MOVIE_DUR) && (movie.nameRU.toLowerCase().includes(localStorage.input.toLowerCase())));
-            handleCompareMovies(filtered);
-          } else {
-            filtered = data.filter(movie => movie.nameRU.toLowerCase().includes(localStorage.input.toLowerCase()));
-            handleCompareMovies(filtered);
-          };
+          let filtered = handleFilterMovies(checked, data, localStorage.input);
+          handleCompareMovies(filtered);
           handleRenderMovies(filtered);
       })
         .catch((err) => console.log(err))
@@ -229,14 +231,8 @@ function App() {
     localStorage.setItem('input', input.input)
     mainApi.getMovies()
       .then((data) => {
-        let filtered = {};
-        if (localStorage.isFilterChecked === 'true') {
-          filtered = data.filter(movie => (movie.duration < SHORT_MOVIE_DUR) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase())));
-          handleCompareMovies(filtered);
-        } else {
-          filtered = data.filter(movie => movie.nameRU.toLowerCase().includes(input.input.toLowerCase()));
-          handleCompareMovies(filtered);
-        };
+        let filtered = handleFilterMovies( (localStorage.isFilterChecked === 'true'), data, input.input);
+        handleCompareMovies(filtered);
         handleRenderMovies(filtered);
       })
       .catch((err) => console.log(err))
@@ -252,14 +248,9 @@ function App() {
 
   function handleSavedFilterCheck(checked) {
     setIsLoading(true);
-    let filtered = [];
     moviesApi.getSavedMovies()
       .then((data) => {
-        if (checked) {
-          filtered = (data.filter(movie => (movie.duration < SHORT_MOVIE_DUR) && (movie.nameRU.toLowerCase().includes(isInputInSaved.toLowerCase()))));
-        } else {
-          filtered = (data.filter(movie => movie.nameRU.toLowerCase().includes(isInputInSaved.toLowerCase())));
-        };
+        let filtered = handleFilterMovies(checked, data, isInputInSaved);
         if (filtered.length === 0) {
           setNothingFoundInSaved('Ничего не найдено');
         } else {
@@ -274,14 +265,9 @@ function App() {
   function handleSavedMovieSearch(input) {
     setIsLoading(true);
     setIsInputInSaved(input.input);
-    let filtered = [];
     moviesApi.getSavedMovies()
       .then((data) => {
-        if (isFilterCheckedInSaved) {
-          filtered = (data.filter(movie => (movie.duration < SHORT_MOVIE_DUR) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase()))));
-        } else {
-          filtered = (data.filter(movie => movie.nameRU.toLowerCase().includes(input.input.toLowerCase())));
-        };
+        let filtered = handleFilterMovies(isFilterCheckedInSaved, data, input.input);
         if (filtered.length === 0) {
           setNothingFoundInSaved('Ничего не найдено');
         } else {
@@ -359,10 +345,11 @@ function App() {
         setErrorMessage('');
         setIsFilterChecked(false);
         setIsFilterCheckedInSaved(false);
+        setCurrentUser(false);
+        setErrorMessageProfile(false);
       })
       .catch((err) => console.log(err));
   }
-
 
   return (
     isPreloaderLoading ? <Preloader /> : (
