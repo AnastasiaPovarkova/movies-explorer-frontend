@@ -17,7 +17,9 @@ import auth from "../../utils/Auth";
 import ProtectedRoute from "../../utils/ProtectedRoute";
 import { UserContext } from "../../contexts/CurrentUserContext";
 import { useLocation } from 'react-router-dom';
-import Preloader from '../Preloader/Preloader'
+import Preloader from '../Preloader/Preloader';
+import { SHORT_MOVIE_DUR, WIDTH_480, WIDTH_768, MOVIES_AMOUNT_LARGE, MOVIES_AMOUNT_MIDDLE,
+  MOVIES_AMOUNT_SMALL, FUTHER_MOVIES_AMOUT_LARGE, FUTHER_MOVIES_AMOUT_SMALL } from '../../utils/Constants';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -99,16 +101,16 @@ function App() {
     }
   }, [windowSize]);
 
-  const setMoviesAmounts = () => {
-    if (windowSize.innerWidth > 768) {
-      setFirstMoviesAmount(12);
-      setAddMoviesAmount(3);
-    } else if (windowSize.innerWidth > 480) {
-      setFirstMoviesAmount(8);
-      setAddMoviesAmount(2);
+  function setMoviesAmounts() {
+    if (windowSize.innerWidth > WIDTH_768) {
+      setFirstMoviesAmount(MOVIES_AMOUNT_LARGE);
+      setAddMoviesAmount(FUTHER_MOVIES_AMOUT_LARGE);
+    } else if (windowSize.innerWidth > WIDTH_480) {
+      setFirstMoviesAmount(MOVIES_AMOUNT_MIDDLE);
+      setAddMoviesAmount(FUTHER_MOVIES_AMOUT_SMALL);
     } else { 
-      setFirstMoviesAmount(5);
-      setAddMoviesAmount(2);
+      setFirstMoviesAmount(MOVIES_AMOUNT_SMALL);
+      setAddMoviesAmount(FUTHER_MOVIES_AMOUT_SMALL);
     }
   }
 
@@ -184,7 +186,6 @@ function App() {
   }
 
   function handleRenderMovies(filteredArr) {
-    console.log('filteredArr.length: ', filteredArr.length);
     if (filteredArr.length === 0) {
       localStorage.setItem('nothingFound', 'Ничего не найдено');
       localStorage.setItem('renderedMovies', '');
@@ -210,7 +211,7 @@ function App() {
         .then((data) => {
           let filtered = {};
           if (checked) {
-            filtered = data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(localStorage.input.toLowerCase())));
+            filtered = data.filter(movie => (movie.duration < SHORT_MOVIE_DUR) && (movie.nameRU.toLowerCase().includes(localStorage.input.toLowerCase())));
             handleCompareMovies(filtered);
           } else {
             filtered = data.filter(movie => movie.nameRU.toLowerCase().includes(localStorage.input.toLowerCase()));
@@ -230,7 +231,7 @@ function App() {
       .then((data) => {
         let filtered = {};
         if (localStorage.isFilterChecked === 'true') {
-          filtered = data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase())));
+          filtered = data.filter(movie => (movie.duration < SHORT_MOVIE_DUR) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase())));
           handleCompareMovies(filtered);
         } else {
           filtered = data.filter(movie => movie.nameRU.toLowerCase().includes(input.input.toLowerCase()));
@@ -255,7 +256,7 @@ function App() {
     moviesApi.getSavedMovies()
       .then((data) => {
         if (checked) {
-          filtered = (data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(isInputInSaved.toLowerCase()))));
+          filtered = (data.filter(movie => (movie.duration < SHORT_MOVIE_DUR) && (movie.nameRU.toLowerCase().includes(isInputInSaved.toLowerCase()))));
         } else {
           filtered = (data.filter(movie => movie.nameRU.toLowerCase().includes(isInputInSaved.toLowerCase())));
         };
@@ -277,7 +278,7 @@ function App() {
     moviesApi.getSavedMovies()
       .then((data) => {
         if (isFilterCheckedInSaved) {
-          filtered = (data.filter(movie => (movie.duration < 40) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase()))));
+          filtered = (data.filter(movie => (movie.duration < SHORT_MOVIE_DUR) && (movie.nameRU.toLowerCase().includes(input.input.toLowerCase()))));
         } else {
           filtered = (data.filter(movie => movie.nameRU.toLowerCase().includes(input.input.toLowerCase())));
         };
