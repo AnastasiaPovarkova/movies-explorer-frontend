@@ -32,5 +32,5 @@ export default function useForm() {
     setFormValue({movie: input});
   }
 
-  return {formValue, error, handleChange, resetValidation, isValid, setData, setInput};
+  return {formValue, error, handleChange, resetValidation, isValid, setData, setInput,};
 }

@@ -98,6 +98,11 @@
   align-items: center;
 }
 
+.profile__disabled {
+  background-color: grey;
+  cursor: default;
+}
+
 .profile__bottom {
   margin-top: auto;
   display: flex;

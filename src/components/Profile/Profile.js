@@ -1,11 +1,11 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from "../../contexts/CurrentUserContext";
 import useForm from "../../hooks/useForm";
 import './Profile.css';
 
 function Profile(props) {
   const currentUser = useContext(UserContext);
-  const {formValue, error, handleChange, setData} = useForm();
+  const { formValue, error, handleChange, setData } = useForm();
 
   function handleLogout(e) {
     e.preventDefault();
@@ -22,6 +22,17 @@ function Profile(props) {
     props.onEditProfileSubmit(formValue);
   }
 
+  useEffect(() => {
+    if ((formValue.name === currentUser.name) && (formValue.email === currentUser.email)) {
+      props.setButtonDisabled(true); 
+    } else {
+      props.setButtonDisabled(false); 
+    }
+  }, [formValue.name, formValue.email, currentUser.name, currentUser.email, props])
+
+  function handleControl(e) {
+    handleChange(e);
+  }
 
   return (
     <section className="profile">
@@ -43,7 +54,7 @@ function Profile(props) {
               required
               name="name"
               value={props.isEditing ? formValue.name : currentUser.name}
-              onChange={handleChange}
+              onChange={handleControl}
               disabled={props.isEditing ? false : true}
             >
             </input>
@@ -60,7 +71,7 @@ function Profile(props) {
               required 
               name="email"
               value={props.isEditing ? formValue.email : currentUser.email}
-              onChange={handleChange}
+              onChange={handleControl}
               disabled={props.isEditing ? false : true}
             >
             </input>
@@ -70,10 +81,10 @@ function Profile(props) {
         <h2 className="profile__error">{props.errorMessageProfile}</h2>
         <button 
           type="submit" 
-          className={`profile__submit ${(props.isEditing) ? '' : 'profile__hidden'}`}
+          className={`profile__submit ${(props.isEditing) ? '' : 'profile__hidden'} ${(props.buttonDisabled) ? 'profile__disabled' : ''}`}
           name="submit" 
           defaultValue="Сохранить"
-          disabled={props.isEditing ? false : true}
+          disabled={(props.isEditing && props.buttonDisabled)? true : false}
         >
           {props.isLoading ? "Сохранение..." : "Сохранить"}
         </button>

@@ -7,8 +7,6 @@ function FilterCheckbox(props) {
     props.onFilterCheckbox(e.target.checked);
   };
 
-  console.log(props.isChecked);
-
   return (
     <label className="checkbox">
 	    <input 

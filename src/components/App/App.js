@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -16,7 +16,6 @@ import moviesApi from "../../utils/MoviesApi";
 import auth from "../../utils/Auth";
 import ProtectedRoute from "../../utils/ProtectedRoute";
 import { UserContext } from "../../contexts/CurrentUserContext";
-import { useLocation } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
 import { SHORT_MOVIE_DUR, WIDTH_480, WIDTH_768, MOVIES_AMOUNT_LARGE, MOVIES_AMOUNT_MIDDLE,
   MOVIES_AMOUNT_SMALL, FUTHER_MOVIES_AMOUT_LARGE, FUTHER_MOVIES_AMOUT_SMALL } from '../../utils/Constants';
@@ -35,6 +34,7 @@ function App() {
   const [isInputInSaved, setIsInputInSaved] = useState('');
   const [savedMovies, setSavedMovies] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [errorMessageProfile, setErrorMessageProfile] = useState('');
   const [nothingFoundInSaved, setNothingFoundInSaved] = useState('');
@@ -424,6 +424,8 @@ function App() {
                 onLogout={handleLogout}
                 isEditing={isEditing}
                 setIsEditing={setIsEditing}
+                buttonDisabled={buttonDisabled}
+                setButtonDisabled={setButtonDisabled}
                 onEditProfileSubmit={onEditProfileSubmit}
                 errorMessageProfile={errorMessageProfile}
                 loggedIn={loggedIn}
