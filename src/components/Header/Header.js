@@ -14,6 +14,8 @@ function Header({handleBurgerClick, isBurgerOpen, onClose, loggedIn}) {
     };
   }, [isBurgerOpen]);
 
+ 
+
   return (
     <header className={`${(location.pathname === "/signup" || location.pathname === "/signin" || location.pathname === "*") ? "header-hidden" : "header"}`}>
       <div className="header__left">

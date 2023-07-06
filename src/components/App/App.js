@@ -16,6 +16,7 @@ import moviesApi from "../../utils/MoviesApi";
 import auth from "../../utils/Auth";
 import ProtectedRoute from "../../utils/ProtectedRoute";
 import { UserContext } from "../../contexts/CurrentUserContext";
+import { useLocation } from 'react-router-dom';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -37,6 +38,7 @@ function App() {
   const [firstMoviesAmount, setFirstMoviesAmount] = useState(0);
   const [addMoviesAmount, setAddMoviesAmount] = useState(0);
   const [windowSize, setWindowSize] = useState(getWindowSize()); 
+  let location = useLocation();
 
   const navigate = useNavigate();
 
@@ -48,6 +50,16 @@ function App() {
       })
       .catch((err) => console.log(err));
   }, [loggedIn]);
+
+  useEffect(() => {
+    if (location.pathname === '/saved-movies') {
+      moviesApi.getSavedMovies()
+      .then((movies) => {
+        setSavedMovies(movies);
+      })
+      .catch((err) => console.log(err));
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     function handleWindowResize() {
