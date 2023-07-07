@@ -84,9 +84,14 @@
   color: #FFFFFF;
 }
 
-.register__submit:hover {
-  opacity: 0.8;
+.register__submit-disabled {
+  background-color: grey;
+  cursor: default;
 }
+
+/* .register__submit:hover {
+  opacity: 0.8;
+} */
 
 .register__bottom {
   display: flex;
@@ -106,6 +111,14 @@
 .register__link {
   color: #3456F3;
   text-decoration: none;
+}
+
+.register__error {
+  margin: auto 0 20px;
+  height: 16px;
+  font-weight: 400;
+  font-size: 12px;
+  color: #FF3055;
 }
 
 @media screen and (max-width: 850px) {

@@ -1,15 +1,50 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect } from 'react';
+import { UserContext } from "../../contexts/CurrentUserContext";
+import useForm from "../../hooks/useForm";
 import './Profile.css';
 
-function Profile() {
+function Profile(props) {
+  const currentUser = useContext(UserContext);
+  const { formValue, error, handleChange, setData } = useForm();
+
+  function handleLogout(e) {
+    e.preventDefault();
+    props.onLogout();
+  }
+
+  function handleEditClick() {
+    props.setIsEditing(true); 
+    setData(currentUser.name, currentUser.email);
+  }
+
+  function handleEditProfileSubmit(e) {
+    e.preventDefault();
+    props.onEditProfileSubmit(formValue);
+  }
+
+  useEffect(() => {
+    if ((formValue.name === currentUser.name) && (formValue.email === currentUser.email)) {
+      props.setButtonDisabled(true); 
+    } else {
+      props.setButtonDisabled(false); 
+    }
+  }, [formValue.name, formValue.email, currentUser.name, currentUser.email, props])
+
+  function handleControl(e) {
+    handleChange(e);
+  }
+
   return (
     <section className="profile">
-      <form name="profile__form" className="profile__form">
+      <form 
+        name="profile__form" 
+        className="profile__form" 
+        onSubmit={props.isEditing ? handleEditProfileSubmit : handleEditClick}
+      >
         <div className="profile__inputs">
-          <h2 className="profile__title">Привет, Виталий!</h2>
+          <h2 className="profile__title">Привет, {currentUser.name}!</h2>
           <div className="profile__input"> 
-            <label for="name-field" className="profile__lable">Имя</label>
+            <label htmlFor="name-field" className="profile__lable">Имя</label>
             <input
               type="text"
               id="name-field"
@@ -18,13 +53,15 @@ function Profile() {
               maxLength="40"
               required
               name="name"
-              defaultValue="Виталий"
-              disabled
-            />
-            <span className="name-field-error profile__span"></span>
+              value={props.isEditing ? formValue.name : currentUser.name}
+              onChange={handleControl}
+              disabled={props.isEditing ? false : true}
+            >
+            </input>
+            <span className="name-field-error profile__span">{error.name}</span>
           </div>
           <div className="profile__input">
-            <label for="email-field" className="profile__lable">E-mail</label>
+            <label htmlFor="email-field" className="profile__lable">E-mail</label>
             <input 
               type="email" 
               id="email-field" 
@@ -33,18 +70,39 @@ function Profile() {
               maxLength="50" 
               required 
               name="email"
-              defaultValue="pochta@yandex.ru"
-              disabled
-            />
-            <span className="email-field-error profile__span"></span>
+              value={props.isEditing ? formValue.email : currentUser.email}
+              onChange={handleControl}
+              disabled={props.isEditing ? false : true}
+            >
+            </input>
+            <span className="email-field-error profile__span">{error.email}</span>
           </div>
         </div>
-        <button type="submit" className="profile__submit" name="submit" defaultValue="Сохранить">Сохранить</button>
+        <h2 className="profile__error">{props.errorMessageProfile}</h2>
+        <button 
+          type="submit" 
+          className={`profile__submit ${(props.isEditing) ? '' : 'profile__hidden'} ${(props.buttonDisabled) ? 'profile__disabled' : ''}`}
+          name="submit" 
+          defaultValue="Сохранить"
+          disabled={(props.isEditing && props.buttonDisabled)? true : false}
+        >
+          {props.isLoading ? "Сохранение..." : "Сохранить"}
+        </button>
+        <div className={`profile__bottom ${(props.isEditing) ? 'profile__hidden' : ''}`}>
+          <button 
+            type="button"
+            className='profile__link'
+            onClick={handleEditClick}
+          >Редактировать
+          </button>
+          <button 
+            type="button"
+            className="profile__link profile__link-red"
+            onClick={handleLogout}
+          >Выйти из аккаунта
+          </button>
+        </div>
       </form>
-      <div className="profile__bottom">
-        <Link className="profile__link">Редактировать</Link>
-        <Link to="/signup" className="profile__link profile__link-red">Выйти из аккаунта</Link>
-      </div>
     </section>
   );
 }

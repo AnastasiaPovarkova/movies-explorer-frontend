@@ -23,6 +23,7 @@ function Footer() {
             </footer>
           } />
         ))}
+        <Route path="*" element={<p className="footer__hidden">a</p>} />
     </Routes>
   );
 }

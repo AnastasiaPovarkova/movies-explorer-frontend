@@ -2,18 +2,19 @@ import React from "react";
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard'
 
-function MoviesCardList() {
+function MoviesCardList(props) {
   return (
     <section className="movies"> 
-      <MoviesCard/>
-      <MoviesCard/>
-      <MoviesCard/>
-      <MoviesCard/>
-      <MoviesCard/>
-      <MoviesCard/>
-      <MoviesCard/>
-      <MoviesCard/>
-      <MoviesCard/>
+      {props.movies?.map((movie) => {
+          return (
+            <MoviesCard
+              key={movie.id}
+              movie={movie}
+              onSaveMovie={props.onSaveMovie}
+              onDeleteMovie={props.onDeleteMovie}
+            />
+          );
+        })}
     </section>
   );
 }
