@@ -133,6 +133,7 @@ function App() {
 
   function handleRegister(formValue) {
     setIsAuthLoading(true);
+    clearAll();
     auth
       .register(formValue.email, formValue.password, formValue.name)
       .then((res) => {
@@ -148,6 +149,7 @@ function App() {
 
   function handleLogin(formValue) {
     setIsAuthLoading(true);
+    clearAll();
     auth
       .authorize(formValue.email, formValue.password)
       .then((data) => {
@@ -337,18 +339,22 @@ function App() {
     auth.logout()
       .then((data) => {
         console.log(data.message);
-        localStorage.clear();
-        setMoviesForRender([]);
-        setSavedMovies([]);
+        clearAll();
         setLoggedIn(false);
-        setFilterMovies([]);
-        setErrorMessage('');
-        setIsFilterChecked(false);
-        setIsFilterCheckedInSaved(false);
-        setCurrentUser(false);
-        setErrorMessageProfile(false);
       })
       .catch((err) => console.log(err));
+  }
+
+  function clearAll() {
+    localStorage.clear();
+    setMoviesForRender([]);
+    setSavedMovies([]);
+    setFilterMovies([]);
+    setErrorMessage('');
+    setIsFilterChecked(false);
+    setIsFilterCheckedInSaved(false);
+    setCurrentUser(false);
+    setErrorMessageProfile(false);
   }
 
   return (
