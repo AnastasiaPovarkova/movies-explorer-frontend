@@ -1,32 +1,105 @@
 .promo {
   margin: 20px 40px 0;
-  background: #F5F5F5;
+  background: #0d0130;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  text-align: center;
+  align-items: left;
+  text-align: left;
   box-sizing: border-box;
 }
 
+.promo__lenta {
+  margin: 60px 0 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.promo__container {
+  width: 100%;
+  height: 144px; 
+  position: relative; 
+  overflow: hidden;
+}
+
+.promo__movies {
+  position: absolute; 
+  top: 0px; 
+  left: 0px; 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 39px;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: bannermove 180s linear infinite;
+}
+
+.promo__movies-top {
+  animation: bannermove 220s linear infinite;
+}
+
+.promo__movie {
+  margin: 0;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.promo__movie-large {
+  width: 362px;
+  height: 144px;
+}
+
+.promo__movie-medium {
+  width: 136px;
+  height: 98px;
+}
+
+.promo__movie-small {
+  width: 98px;
+  height: 98px;
+}
+
+@keyframes bannermove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-50%, 0);
+  }
+}
+
+.promo__info {
+  margin: 0 86px 60px;
+}
+
+.promo__text {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+}
+
 .promo__title {
+  margin: 10px 0 10px;
   max-width: 730px;
-  margin: 160px 0 151px;
   font-weight: 400;
   font-size: 50px;
   line-height: 58px;
-  text-align: center;
   letter-spacing: -0.04em;
-  color: #000000;
+  color: #FFFFFF;
 }
+
 
 @media screen and (max-width: 880px) {
   .promo {
     margin: 20px 20px 0;
   }
   .promo__title {
-    margin: 350px 24px 380px;
     font-size: 40px;
     line-height: 52px;
   }
@@ -37,7 +110,6 @@
     margin: 14px 14px 0;
   }
   .promo__title {
-    margin: 220px 14px 255px;
     font-size: 29px;
     line-height: 37px;
   }

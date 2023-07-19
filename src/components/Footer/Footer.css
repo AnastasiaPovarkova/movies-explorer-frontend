@@ -53,6 +53,10 @@
   text-decoration: none;
 }
 
+.footer__link:hover {
+  opacity: 0.7;
+}
+
 .footer__hidden {
   display: none;
 }

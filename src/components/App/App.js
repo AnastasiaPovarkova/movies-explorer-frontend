@@ -25,6 +25,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(false);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const [allMovies, setAllMovies] = useState([]);
   const [filterMovies, setFilterMovies] = useState([]);
   const [moviesForRender, setMoviesForRender] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +60,13 @@ function App() {
 
   useEffect(() => {
     setIsPreloaderLoading(true);
-    if ((location.pathname === '/saved-movies')) {
+    if ((location.pathname === '/')) {
+      mainApi.getMovies() 
+      .then((allMovies) => {
+        setAllMovies(allMovies);
+      })
+      .catch((err) => console.log(err))
+    } else if ((location.pathname === '/saved-movies')) {
       moviesApi.getSavedMovies()
       .then((movies) => {
         setNothingFoundInSaved('');
@@ -371,14 +378,18 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Main />}
+            element={
+              <Main 
+                allMovies={allMovies}
+              />
+            }
           />
           <Route
             path="/movies"
             element={
               <ProtectedRoute 
                 element={Movies}
-                isLoading = {isLoading}
+                isLoading={isLoading}
                 filterMovies={moviesForRender}
                 onFilterCheckbox={handleFilterCheck}
                 onMovieSearch={handleMovieSearch} 
@@ -396,7 +407,7 @@ function App() {
             element={
               <ProtectedRoute 
                 element={SavedMovies}
-                isLoading = {isLoading}
+                isLoading={isLoading}
                 savedMovies={savedMovies}
                 onFilterCheckbox={handleSavedFilterCheck}
                 isChecked={isFilterCheckedInSaved}
@@ -413,7 +424,7 @@ function App() {
             element={
               <ProtectedRoute 
                 element={Profile}
-                isLoading = {isLoading}
+                isLoading={isLoading}
                 onLogout={handleLogout}
                 isEditing={isEditing}
                 setIsEditing={setIsEditing}
