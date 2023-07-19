@@ -71,10 +71,16 @@
   line-height: 17px;
   text-align: center;
   color: #000000;
+  transition: 0.5s ease-out;
+}
+
+.project__week:hover {
+  /* background: #2BE080; */
+  box-shadow: inset 800px 0 0 0 #2BE080;
 }
 
 .project__week-left {
-  background: #2BE080;;
+  background: #2BE080;
 }
 
 .project__week-right {

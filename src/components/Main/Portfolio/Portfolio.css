@@ -19,6 +19,15 @@
   flex-direction: row;
   justify-content: space-between;
   border-bottom: 1px solid #E6E6E6;
+  box-sizing: border-box;
+}
+
+.portfolio__container:hover .portfolio__text{
+  transform: translate(5px, -2px);
+}
+
+.portfolio__container:hover .portfolio__arrow{
+  transform: translate(5px, -2px);
 }
 
 .portfolio__last {

@@ -13,7 +13,7 @@ function Footer() {
               </h2>
               <div className="footer__info">
                 <p className="footer__copyright">
-                  &copy;&nbsp;{new Date().getFullYear()}
+                  Anastasia Povarkova &copy;&nbsp;{new Date().getFullYear()}
                 </p>
                 <div className="footer__links">
                   <a href="https://practicum.yandex.ru/" target="_blank" rel="noreferrer" className="footer__link">Яндекс.Практикум</a>

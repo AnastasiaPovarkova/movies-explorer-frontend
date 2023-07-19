@@ -76,10 +76,20 @@
   text-decoration: none;
 }
 
+.about__link:hover {
+  opacity: 0.7;
+}
+
 .about__img {
   width: 270px;
   height: 327px;
   border-radius: 10px;
+  object-fit: scale-down;
+  transition: transform 1s ease-out;
+}
+
+.about__img:hover {
+  transform: scale(1.2);
 }
 
 @media screen and (max-width: 880px) {
