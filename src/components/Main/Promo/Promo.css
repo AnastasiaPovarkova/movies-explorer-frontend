@@ -11,17 +11,23 @@
 }
 
 .promo__lenta {
-  margin: 60px 0 70px;
+  padding: 60px 0 70px;
   display: flex;
   flex-direction: column;
   gap: 36px;
+  overflow: visible;
+  overflow-x: hidden;
 }
 
 .promo__container {
   width: 100%;
   height: 144px; 
   position: relative; 
-  overflow: hidden;
+  overflow: visible;
+}
+
+.promo__container-display {
+  display: inline-block;
 }
 
 .promo__movies {
@@ -32,19 +38,20 @@
   flex-direction: row;
   align-items: center;
   gap: 39px;
-  overflow: hidden;
+  overflow: visible;
   white-space: nowrap;
-  animation: bannermove 180s linear infinite;
+  animation: bannermove 300s linear infinite;
 }
 
 .promo__movies-top {
-  animation: bannermove 220s linear infinite;
+  animation: bannermove 500s linear infinite;
 }
 
 .promo__movie {
   margin: 0;
   border-radius: 20px;
   object-fit: cover;
+  box-shadow: 0px 0px 66px 0px rgba(255, 255, 255, 0.25);
 }
 
 .promo__movie-large {
@@ -94,6 +101,24 @@
   color: #FFFFFF;
 }
 
+.promo__button {
+  margin-top: 20px;
+  padding: 12px 24px 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.promo__button:hover {
+  opacity: 0.9;
+}
 
 @media screen and (max-width: 880px) {
   .promo {
@@ -112,5 +137,14 @@
   .promo__title {
     font-size: 29px;
     line-height: 37px;
+  }
+  .promo__container-display {
+    display: none;
+  }
+  .promo__info {
+    margin: 0 46px 60px;
+  }
+  .promo__button {
+    font-size: 16px;
   }
 }

@@ -15,6 +15,7 @@ import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import auth from "../../utils/Auth";
 import ProtectedRoute from "../../utils/ProtectedRoute";
+import ProtectedRouteForMovies from "../../utils/ProtectedRouteForMovies"
 import { UserContext } from "../../contexts/CurrentUserContext";
 import Preloader from '../Preloader/Preloader';
 import { SHORT_MOVIE_DUR, WIDTH_480, WIDTH_768, MOVIES_AMOUNT_LARGE, MOVIES_AMOUNT_MIDDLE,
@@ -387,7 +388,7 @@ function App() {
           <Route
             path="/movies"
             element={
-              <ProtectedRoute 
+              <ProtectedRouteForMovies 
                 element={Movies}
                 isLoading={isLoading}
                 filterMovies={moviesForRender}

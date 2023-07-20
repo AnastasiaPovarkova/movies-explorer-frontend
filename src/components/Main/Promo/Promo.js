@@ -1,4 +1,5 @@
 import './Promo.css';
+import { Link } from 'react-router-dom';
 // import NavTab from '../NavTab/NavTab';
 
 function Promo(props) {
@@ -19,7 +20,7 @@ function Promo(props) {
             })}
           </div>
         </div>
-        <div className="promo__container"> 
+        <div className="promo__container promo__container-display"> 
           <div className="promo__movies">
             {props.allMovies?.map((movie) => {
               return (
@@ -36,6 +37,7 @@ function Promo(props) {
       <div className="promo__info">
         <h2 className="promo__text">Учебный проект студента факультета Веб-разработки</h2>
         <h2 className="promo__title">Сервис для поиска фильмов</h2>
+        <Link to="/movies" className="promo__button">Найти фильм</Link>
       </div>
       {/* <NavTab /> */}
     </section>

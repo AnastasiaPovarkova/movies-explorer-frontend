@@ -36,7 +36,7 @@ function SearchForm(props) {
             name="movie" 
             value={formValue.movie}
             onChange={handleChange}
-            placeholder="Фильм" 
+            placeholder="Фильм"
             className="search__input" 
           >
           </input>
