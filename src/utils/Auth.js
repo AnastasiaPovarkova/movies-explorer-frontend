@@ -56,7 +56,6 @@ class Auth {
 const auth = new Auth({
   BASE_URL: "https://api.diploma.anstpov.nomoredomains.rocks",
   headers: {
-    "Accept": "application/json",
     "Content-Type": "application/json",
   },
 });
