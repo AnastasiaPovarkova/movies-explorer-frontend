@@ -45,7 +45,7 @@ class Auth {
 
   logout = () => {
     return this._request(`${this._baseUrl}/logout`, {
-      method: "GET",
+      method: "POST",
       headers: this._headers,
       credentials: "include",
     });
