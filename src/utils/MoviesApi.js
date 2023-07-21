@@ -78,6 +78,7 @@ const moviesApi = new MoviesApi({
   baseUrl: "https://api.diploma.anstpov.nomoredomains.rocks",
   headers: {
     "Content-Type": "application/json",
+    Accept: 'application/json',
   },
 });
   
