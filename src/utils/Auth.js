@@ -57,7 +57,7 @@ const auth = new Auth({
   BASE_URL: "https://api.diploma.anstpov.nomoredomains.rocks",
   headers: {
     "Content-Type": "application/json",
-    Accept: 'application/json',
+    'Access-Control-Allow-Origin': '*',
   },
 });
   

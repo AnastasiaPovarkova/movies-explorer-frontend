@@ -346,7 +346,7 @@ function App() {
   function handleLogout() {
     auth.logout()
       .then((data) => {
-        console.log(data.message);
+        console.log('data: ', data);
         clearAll();
         setLoggedIn(false);
       })
