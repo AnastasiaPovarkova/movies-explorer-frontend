@@ -361,8 +361,8 @@ function App() {
     setErrorMessage('');
     setIsFilterChecked(false);
     setIsFilterCheckedInSaved(false);
-    setCurrentUser(false);
-    setErrorMessageProfile(false);
+    setCurrentUser({});
+    setErrorMessageProfile('');
   }
 
   return (
