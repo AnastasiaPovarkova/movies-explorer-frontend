@@ -41,10 +41,14 @@
   overflow: visible;
   white-space: nowrap;
   animation: bannermove 300s linear infinite;
+  -webkit-animation: bannermove 300s linear infinite;
+  -moz-animation: bannermove 300s linear infinite;
 }
 
 .promo__movies-top {
   animation: bannermove 500s linear infinite;
+  -webkit-animation: bannermove 500s linear infinite;
+  -moz-animation: bannermove 500s linear infinite;
 }
 
 .promo__movie {
@@ -72,9 +76,13 @@
 @keyframes bannermove {
   0% {
     transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
   }
   100% {
     transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
   }
 }
 
@@ -146,5 +154,9 @@
   }
   .promo__button {
     font-size: 16px;
+  }
+  .promo__movie-large {
+    width: 280px;
+    height: 144px;
   }
 }
