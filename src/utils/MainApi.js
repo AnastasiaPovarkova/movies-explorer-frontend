@@ -27,6 +27,7 @@ const mainApi = new MainApi({
   baseUrl: "https://api.nomoreparties.co/beatfilm-movies",
   headers: {
     "Content-Type": "application/json",
+    'Accept': 'application/json',
   },
 });
   

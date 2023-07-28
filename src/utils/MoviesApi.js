@@ -75,10 +75,10 @@ class MoviesApi {
 }
   
 const moviesApi = new MoviesApi({
-  baseUrl: "https://front.diploma.anstpov.nomoreparties.sbs/api",
+  baseUrl: "https://api.diploma.anstpov.nomoredomains.rocks",
   headers: {
     "Content-Type": "application/json",
-    Accept: 'application/json',
+    'Accept': 'application/json',
   },
 });
   

@@ -54,9 +54,10 @@ class Auth {
 }
   
 const auth = new Auth({
-  BASE_URL: "https://front.diploma.anstpov.nomoreparties.sbs/api",
+  BASE_URL: "https://api.diploma.anstpov.nomoredomains.rocks",
   headers: {
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
   },
 });
   
