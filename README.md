@@ -1,47 +1,65 @@
-# movies-explorer-frontend
+# Проект Movies-Explorer на реакте
 
-Фронтенд для дипломной работы Movies-Explorer. Написан на React. 
+<a href="https://mestofront.anstpov.nomoredomains.monster" target="_blank">
+    <img src="https://github.com/AnastasiaPovarkova/movies-explorer-frontend/blob/main/src/images/screensaver.png?raw=true" width="900" title="Movies https" alt="Movies https"/>
+</a>
 
+## На этом сайте пользватель может:
+
+    Зарегистрироваться под любым мейлом (даже выдуманным)
+    Редактировать свой профиль (имя, email)
+    Искать фильмы для вечернего просмотра
+    Сохранять и удалять фильмы из избранного
+    Посмотреть информацию о создании и создателе дипломной работы
+____
+
+## Технологии
+
+Технологии, использованные в проекте
+
+### React
+
+Использованы хуки use.State и use.Effect. Прописан UserContext. Всплывающие уведомления при успешной регистрации или ошибке регистрации и логина.
+
+### react-router-dom
+
+BrowserRouter, Routes, Route, Link, useNavigate, Navigate. Роут страниц /movies, /saved-movies и /profile защищен ProtectedRoute.
+
+### REST API
+
+Работа с сервером для получения данных пользователя и фильмов.
+
+### Authorization
+
+Все запросы на авторизацию, регистрацию работают через бэкенд `https://api.diploma.anstpov.nomoredomains.rocks`. Авторизация работает через cookie (на Android).
+
+
+## Команды для сборки и запуска проекта
+
+В папке проекта вы можете запустить команды:
+
+### `npm start`
+
+Запустить проект в режиме разработки.
+Страничка будет автоматически обновляться при изменении кода, ошибки отслеживаются в консоли.
+Адрес страницы: http://localhost:3000/
+
+### `npm run build`
+
+Скрипт сгенерирует оптимизированную сборку проекта. Внутри проекта появится новая папка `build`. Внутри `build/static` можно найти оптимизированные версии всего написанного кода, наряду с другими ресурсами: JS, CSS и шрифтами. 
+
+### `npm run deploy`
+
+Размещение проекта на сервере. В команде уже прописан predeploy: build.
+
+
+## Ссылки 
+
+IP 158.160.98.150
 Ссылка на макет диплома: https://disk.yandex.ru/d/vjfJmEqWAue7Ug
 
 Ссылка на сайт: https://front.diploma.anstpov.nomoreparties.sbs
 
-Ссылка на пулл-реквест: https://github.com/AnastasiaPovarkova/movies-explorer-frontend/pull/2
+Ссылка на бекэнд: https://api.diploma.anstpov.nomoredomains.rocks
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3002](http://localhost:3002) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
