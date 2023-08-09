@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 // import NavTab from '../NavTab/NavTab';
 
 function Promo(props) {
-  console.log(props);
   return (
     <section className="promo">
       <div className="promo__lenta">
