@@ -1,7 +1,7 @@
 # Проект Movies-Explorer на реакте
 
 <a href="https://front.diploma.anstpov.nomoreparties.sbs" target="_blank">
-    <img src="https://github.com/AnastasiaPovarkova/movies-explorer-frontend/blob/main/src/images/screensaver.png?raw=true" width="900" title="Movies https" alt="Movies https"/>
+    <img src="https://github.com/AnastasiaPovarkova/movies-explorer-frontend/blob/main/src/images/screensaverr.png?raw=true" width="900" title="Movies https" alt="Movies https"/>
 </a>
 
 ## На этом сайте пользватель может:
