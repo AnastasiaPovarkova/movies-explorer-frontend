@@ -1,4 +1,5 @@
 # Проект Movies-Explorer на реакте
+#### Статус: доделать To Do :heavy_exclamation_mark:
 
 <a href="https://front.diploma.anstpov.nomoreparties.sbs" target="_blank">
     <img src="https://github.com/AnastasiaPovarkova/movies-explorer-frontend/blob/main/src/images/screensaverr.png?raw=true" width="900" title="Movies https" alt="Movies https"/>
@@ -52,14 +53,24 @@ BrowserRouter, Routes, Route, Link, useNavigate, Navigate. Роут страни
 
 Размещение проекта на сервере. В команде уже прописан predeploy: build.
 
+**To Do**
+
+&nbsp; :small_red_triangle: &nbsp; Перенести бэк на поддомен фронта (для корректной работы на iOS)
+
+&nbsp; :small_red_triangle: &nbsp; Пофиксить обновление страниц
+
+&nbsp; :small_red_triangle: &nbsp; Анимация главной страницы в Safari
 
 ## Ссылки 
 
 IP 158.160.98.150
+
 Ссылка на макет диплома: https://disk.yandex.ru/d/vjfJmEqWAue7Ug
 
-Ссылка на сайт: https://front.diploma.anstpov.nomoreparties.sbs
+Frontend: https://front.diploma.anstpov.nomoreparties.sbs
 
-Ссылка на бекэнд: https://api.diploma.anstpov.nomoredomains.rocks
+Backend: https://api.diploma.anstpov.nomoredomains.rocks
+
+Репозиторий бекэнд: https://github.com/AnastasiaPovarkova/movies-explorer-api
 
 
